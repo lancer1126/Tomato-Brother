@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿using ScriptObj;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace System
 {
     public class Menu : MonoBehaviour
     {
+        public Bag bag;
         public GameObject settingUI;
+        public GameStatus gameStatus;
+        public PlayerStatus playerStatus;
 
         private void Awake()
         {
@@ -13,7 +18,11 @@ namespace System
 
         public void StartGame()
         {
-            Debug.Log("开始游戏");
+            bag.Init();
+            gameStatus.Init();
+            playerStatus.Init();
+            Time.timeScale = 1;
+            SceneManager.LoadScene("Select");
         }
 
         public void OpenSetting()
