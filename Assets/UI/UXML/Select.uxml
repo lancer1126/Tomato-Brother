@@ -1,9 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="WeaponItem" src="project://database/Assets/UI/Resources/WeaponItem.uxml?fileID=9197481963319205126&amp;guid=5a001ac82853db8418abec6095fc4b71&amp;type=3#WeaponItem" />
+    <ui:Template name="CharacterItem" src="project://database/Assets/UI/Resources/CharacterItem.uxml?fileID=9197481963319205126&amp;guid=724f5b0c80aeff6428bc6c1ed0706480&amp;type=3#CharacterItem" />
+    <Style src="project://database/Assets/UI/USS/Global.uss?fileID=7433441132597879392&amp;guid=1cfac5e0f38668b4cbd1a9e20c6aaae1&amp;type=3#Global" />
+    <Style src="project://database/Assets/UI/USS/Select.uss?fileID=7433441132597879392&amp;guid=5034f77f668b730479070415887bede7&amp;type=3#Select" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="Character" style="flex-grow: 1; flex-direction: column; flex-basis: 32%;">
+            <ui:VisualElement name="Title" style="flex-grow: 1; width: 100%; height: 20%;">
+                <ui:Label tabindex="-1" text="角色" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 80px; -unity-font-style: bold; -unity-text-align: middle-center; width: 100%; height: 100%; color: rgb(219, 208, 208);" />
+            </ui:VisualElement>
+            <ui:ScrollView style="width: 100%; height: 80%;">
+                <ui:VisualElement name="CharacterList" style="flex-grow: 1; flex-direction: row; flex-wrap: wrap; width: 100%; height: 100%; justify-content: center;">
+                    <ui:Instance template="CharacterItem" name="CharacterItem" />
+                    <ui:Instance template="CharacterItem" name="CharacterItem" />
+                    <ui:Instance template="CharacterItem" name="CharacterItem" />
+                    <ui:Instance template="CharacterItem" name="CharacterItem" />
+                    <ui:Instance template="CharacterItem" name="CharacterItem" />
+                </ui:VisualElement>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement name="Weapon" style="flex-grow: 1; flex-basis: 32%;">
+            <ui:VisualElement name="Title" style="flex-grow: 1; width: 100%; height: 20%;">
+                <ui:Label tabindex="-1" text="武器" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 80px; -unity-font-style: bold; -unity-text-align: middle-center; width: 100%; height: 100%; color: rgb(219, 208, 208);" />
+            </ui:VisualElement>
+            <ui:ScrollView style="width: 100%; height: 80%;">
+                <ui:VisualElement name="WeaponList" style="flex-grow: 1; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                    <ui:Instance template="WeaponItem" name="WeaponItem" style="width: auto; height: auto;" />
+                </ui:VisualElement>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement name="Player" style="flex-grow: 1; flex-basis: 36%; justify-content: center; align-items: center;">
+            <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GoButton" style="width: 300px; height: 100px; justify-content: center; font-size: 50px; -unity-font-style: bold; -unity-font: url(&quot;project://database/Assets/Fonts/ipix_12px.ttf?fileID=12800000&amp;guid=92d50906c9e64544abd064b93dfd6277&amp;type=3#ipix_12px&quot;); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; top: 10%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

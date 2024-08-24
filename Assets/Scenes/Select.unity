@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 411054018}
   - component: {fileID: 411054017}
+  - component: {fileID: 411054019}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 95e9544e539dbb74db185f9585b15542, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 5d0d83e9657e1b749b02aab50b7e4208, type: 3}
   m_SortingOrder: 0
 --- !u!4 &411054018
 Transform:
@@ -170,6 +171,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &411054019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411054016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f62214cf08d4a4f8828efc7e65430ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bag: {fileID: 11400000, guid: 6a04348c74126884787e52ada275b293, type: 2}
+  player: {fileID: 1948801365}
+  shopProduct: {fileID: 11400000, guid: e18d9815983400b468964064c0c3d3d4, type: 2}
+  confirmAudio: {fileID: 8300000, guid: e166ad01fa4894540bace9b1be5342da, type: 3}
 --- !u!1 &1737917184
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +463,7 @@ Transform:
   m_GameObject: {fileID: 1948801365}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.047, z: 0}
+  m_LocalPosition: {x: 5.524, y: 1.93, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
