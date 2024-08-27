@@ -1,6 +1,7 @@
 ﻿using System;
 using ScriptObj;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace UI
@@ -97,7 +98,10 @@ namespace UI
 
         private void GoToFight()
         {
-            Debug.Log("进入战斗！");
+            AudioSource.PlayClipAtPoint(confirmAudio, transform.position, _volume);
+            bag.character = shopProduct.characterList[_characterIndex];
+            bag.weaponList.Add(shopProduct.weaponList[_weaponIndex]);
+            SceneManager.LoadScene("Fight");
         }
 
         private void CustomCharacterStyle(TemplateContainer itemUI, Character item)

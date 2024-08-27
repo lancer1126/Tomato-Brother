@@ -7,12 +7,14 @@ namespace ScriptObj
     public class Bag : ScriptableObject
     {
         public Character character;
+        public List<Weapon> weaponList;
         public List<Item> itemList;
         
         public void Init()
         {
             character = null;
             itemList.Clear();
+            weaponList.Clear();
         }
     }
 }
