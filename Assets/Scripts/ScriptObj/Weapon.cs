@@ -6,5 +6,6 @@ namespace ScriptObj
     public class Weapon : ScriptableObject
     {
         public Sprite weaponImg;
+        public GameObject weaponPrefab;
     }
 }

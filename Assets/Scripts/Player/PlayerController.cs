@@ -1,4 +1,5 @@
-﻿using ScriptObj;
+﻿using System.Collections.Generic;
+using ScriptObj;
 using UnityEngine;
 
 namespace Player
@@ -9,6 +10,8 @@ namespace Player
         private Bag playerBag;
         [SerializeField]
         private PlayerStatus playerStatus;
+        [SerializeField]
+        private List<Vector2> weaponPosList;
 
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
         private const float Speed = 300f;
@@ -65,6 +68,9 @@ namespace Player
             transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
         }
 
+        /// <summary>
+        /// 加载角色动画
+        /// </summary>
         private void LoadCharacter()
         {
             if (playerBag.character)
@@ -73,6 +79,17 @@ namespace Player
             }
         }
 
-        private void LoadPlayerWeapon() { }
+        /// <summary>
+        /// 加载武器并初始化武器位置
+        /// </summary>
+        private void LoadPlayerWeapon()
+        {
+            for (var i = 0; i < playerBag.weaponList.Count; i++)
+            {
+                Instantiate(
+                    playerBag.weaponList[i].weaponPrefab, weaponPosList[i], Quaternion.identity, transform
+                );
+            }
+        }
     }
 }
