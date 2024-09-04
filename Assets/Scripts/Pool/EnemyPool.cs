@@ -8,5 +8,14 @@ namespace Pool
         {
             InitPool();
         }
+
+        protected override BaseEnemy ToCreate()
+        {
+            var ins = Instantiate(prefab, transform);
+            ins.SetDeactivateAction(delegate { ReleaseFromPool(ins); });
+            ins.SetActiveAction(GetFromPool);
+
+            return ins;
+        }
     }
 }

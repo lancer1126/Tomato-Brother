@@ -26365,6 +26365,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &458965905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458965906}
+  m_Layer: 0
+  m_Name: Pool-Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &458965906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458965905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2079159960}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1050052435 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8231507053646852325, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
@@ -29126,6 +29157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2079159960}
+  - component: {fileID: 2079159961}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
@@ -29145,9 +29177,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 458965906}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2079159961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079159959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fa84408a3242179fb235e3be5a8e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyList:
+  - {fileID: 6227964141164645452, guid: 4a15eafcba24f984391240fc255fc201, type: 3}
 --- !u!1 &2088633308
 GameObject:
   m_ObjectHideFlags: 0
@@ -29266,6 +29313,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8519059882816086929, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519059882816086929, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519059882816086929, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []

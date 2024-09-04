@@ -9,6 +9,8 @@ namespace Pool
         private ObjectPool<T> _pool;
 
         public void SetPrefab(T obj) => prefab = obj;
+        public void ReleaseFromPool(T obj) => _pool.Release(obj);
+        public T GetFromPool() => _pool.Get();
 
         protected void InitPool(int defaultSize = 100, int maxSize = 500, bool onCheck = true)
         {

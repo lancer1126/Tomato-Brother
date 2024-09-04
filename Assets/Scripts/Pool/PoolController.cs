@@ -8,9 +8,10 @@ namespace Pool
     {
         public static PoolController Instance { get; set; }
 
+        public List<EnemyPool> enemyPools;
+
         [SerializeField]
         private BaseEnemy[] enemyList;
-        private List<EnemyPool> _enemyPools;
 
         private void Awake()
         {
@@ -19,21 +20,22 @@ namespace Pool
 
         private void InitEnemyPool()
         {
+            enemyPools = new List<EnemyPool>();
             // 遍历敌人列表，为每种敌人生成一个对象池，将其挂载到pool-enemy之下
             foreach (var enemy in enemyList)
             {
-                var poolHolder = new GameObject($"pool-{enemy.name}")
+                var poolHolder = new GameObject($"Pool-{enemy.name}")
                 {
                     transform =
                     {
-                        parent = transform.Find("pool-enemy"),
+                        parent = transform.Find("Pool-Enemy"),
                         position = transform.position
                     }
                 };
                 var pool = poolHolder.AddComponent<EnemyPool>();
                 pool.SetPrefab(enemy);
-                
-                _enemyPools.Add(pool);
+
+                enemyPools.Add(pool);
             }
         }
     }
