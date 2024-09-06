@@ -15,6 +15,7 @@ namespace Pool
 
         private void Awake()
         {
+            Instance = this;
             InitEnemyPool();
         }
 
