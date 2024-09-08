@@ -62,6 +62,24 @@ namespace Enemy
             GetAction = getFunc;
         }
 
+        public virtual void TakeDamage(int damage)
+        {
+            if (_isDead)
+            {
+                return;
+            }
+
+            if (currentHealth <= damage)
+            {
+                currentHealth = 0;
+                Die();
+            }
+            else
+            {
+                currentHealth -= damage;
+            }
+        }
+
         protected virtual void Move()
         {
             if (ToPlayerDir.magnitude > 0.5f)
@@ -82,6 +100,12 @@ namespace Enemy
             {
                 transform.position += Vector3.forward;
             }
+        }
+
+        protected virtual void Die()
+        {
+            _isDead = true;
+            ReleaseAction?.Invoke();
         }
     }
 }

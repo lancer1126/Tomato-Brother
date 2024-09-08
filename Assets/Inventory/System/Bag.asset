@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a30c16b548482585d25643f907331d, type: 3}
   m_Name: Bag
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: fb47b40974649b044ad1c86cb1cdfc36, type: 2}
+  weaponList: []
   itemList: []

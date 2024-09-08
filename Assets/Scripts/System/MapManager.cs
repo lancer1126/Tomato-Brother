@@ -10,9 +10,7 @@ namespace System
         [SerializeField]
         private int enemyBornCount = 10; // 批次生成敌人数量
         [SerializeField]
-        private int enemySpecies = 1; // 敌人种类数
-        [SerializeField]
-        private float gameTime = 30; // 游戏时间
+        private float gameTime = 30; // 一局游戏时间
         [SerializeField]
         private float enemyBornInterval = 3; // 敌人生成间隔
         [SerializeField]
@@ -22,6 +20,7 @@ namespace System
 
         private const int MapScaleX = 32;
         private const int MapScaleY = 16;
+        private int _enemyType;
         private List<EnemyPool> _enemyPools; // 敌人对象池
 
         private void Awake()
@@ -32,6 +31,7 @@ namespace System
         private void Start()
         {
             _enemyPools = PoolController.Instance.enemyPools;
+            _enemyType = _enemyPools.Count;
         }
 
         private void Update()
@@ -53,9 +53,9 @@ namespace System
                 // 敌人生成范围
                 var x = UnityEngine.Random.Range(-MapScaleX, MapScaleX);
                 var y = UnityEngine.Random.Range(-MapScaleY, MapScaleY);
-                
+
                 // 敌人种类索引，按照索引的顺序生成不同种类的敌人
-                var enemyIndex = UnityEngine.Random.Range(0, enemySpecies - 1);
+                var enemyIndex = UnityEngine.Random.Range(0, _enemyType);
                 StartCoroutine(ToBorn(enemyIndex, new Vector2(x, y)));
             }
         }
@@ -64,7 +64,7 @@ namespace System
         {
             // 敌人生成动画持续3秒
             var bornSign = Instantiate(bornAnimation, position, Quaternion.identity);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(enemyBornInterval);
 
             if (bornSign)
             {

@@ -7,6 +7,8 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
+        private float speed = 300f;
+        [SerializeField]
         private Bag playerBag;
         [SerializeField]
         private PlayerStatus playerStatus;
@@ -14,7 +16,7 @@ namespace Player
         private List<Vector2> weaponPosList;
 
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
-        private const float Speed = 300f;
+
         private Vector3 _moveDir;
         private Animator _animator;
         private Rigidbody2D _rb2;
@@ -50,7 +52,7 @@ namespace Player
                     Flip(tls);
                 }
 
-                _rb2.velocity = _moveDir * (Speed * Time.deltaTime);
+                _rb2.velocity = _moveDir * (speed * Time.deltaTime);
             }
             else
             {
@@ -86,9 +88,8 @@ namespace Player
         {
             for (var i = 0; i < playerBag.weaponList.Count; i++)
             {
-                Instantiate(
-                    playerBag.weaponList[i].weaponPrefab, weaponPosList[i], Quaternion.identity, transform
-                );
+                var weapon = Instantiate(playerBag.weaponList[i].weaponPrefab, transform);
+                weapon.transform.localPosition = weaponPosList[i];
             }
         }
     }
