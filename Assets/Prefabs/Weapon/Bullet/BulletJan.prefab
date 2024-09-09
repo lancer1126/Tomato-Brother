@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4314475455870277524}
   - component: {fileID: 6834842273223610252}
   - component: {fileID: 346403780792937949}
+  - component: {fileID: 562528665989735714}
   m_Layer: 0
   m_Name: BulletJan
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: -1876881182, guid: 4f2afa2259d0670408cae6b9d8210059, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -161,8 +162,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec746e43bf0b476cbd36c6faedb4d83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 500
   damage: 5
   forward: {x: 0, y: 0}
   maxPenetration: 1
-  repelPower: 0
+  repelPower: 100
+--- !u!95 &562528665989735714
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596982489852149619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ca8734e5aff8e04a8ed8a6f2fd0bea2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

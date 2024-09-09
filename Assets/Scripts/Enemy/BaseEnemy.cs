@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Enemy
@@ -20,6 +21,7 @@ namespace Enemy
         protected Rigidbody2D Rb2;
 
         private static readonly int IsRun = Animator.StringToHash("isRun");
+        private static readonly int IsDead = Animator.StringToHash("isDead");
         private bool _isHurt;
         private bool _isDead;
 
@@ -62,6 +64,10 @@ namespace Enemy
             GetAction = getFunc;
         }
 
+        /// <summary>
+        /// 被子弹击中时扣除血量
+        /// </summary>
+        /// <param name="damage"></param>
         public virtual void TakeDamage(int damage)
         {
             if (_isDead)
@@ -78,6 +84,20 @@ namespace Enemy
             {
                 currentHealth -= damage;
             }
+        }
+
+        /// <summary>
+        /// 敌人被子弹击中时触发击退效果
+        /// </summary>
+        public virtual void TakeRepel(Transform attacker, float repelPower)
+        {
+            if (currentHealth == 0) 
+            {
+                return;
+            }
+
+            var dir = (transform.position - attacker.position).normalized;
+            StartCoroutine(ToRepel(dir * repelPower));
         }
 
         protected virtual void Move()
@@ -105,7 +125,20 @@ namespace Enemy
         protected virtual void Die()
         {
             _isDead = true;
+            Anim.SetBool(IsDead, true);
+        }
+        
+        protected void RecycleEnemy()
+        {
             ReleaseAction?.Invoke();
+        }
+
+        private IEnumerator ToRepel(Vector3 power)
+        {
+            _isHurt = true;
+            Rb2.AddForce(power, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.1f);
+            _isHurt = false;
         }
     }
 }
