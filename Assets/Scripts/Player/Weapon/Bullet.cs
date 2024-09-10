@@ -9,6 +9,8 @@ namespace Player.Weapon
         public int speed;
         public int damage;
         public Vector2 forward;
+
+        protected bool BulletEnd;
         protected Action ReleaseAction;
         protected Rigidbody2D Rb2;
 
@@ -19,8 +21,15 @@ namespace Player.Weapon
 
         protected virtual void FixedUpdate()
         {
-            forward = transform.right.normalized;
-            Rb2.velocity = forward * (speed * Time.deltaTime);
+            if (BulletEnd)
+            {
+                Rb2.velocity = Vector2.zero;
+            }
+            else
+            {
+                forward = transform.right.normalized;
+                Rb2.velocity = forward * (speed * Time.deltaTime);
+            }
         }
 
         public void SetDeactivateAction(Action ra)

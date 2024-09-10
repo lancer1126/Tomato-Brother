@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletIndex: 1
+  enemyCollisionFactor: 1
   attackRange: 10
   attackInterval: 1
   muzzle: {fileID: 0}

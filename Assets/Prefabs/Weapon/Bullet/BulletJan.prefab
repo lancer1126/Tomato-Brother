@@ -127,10 +127,10 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 320
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 183
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -162,11 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec746e43bf0b476cbd36c6faedb4d83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  speed: 1000
   damage: 5
   forward: {x: 0, y: 0}
   maxPenetration: 1
-  repelPower: 100
+  repelPower: 500
 --- !u!95 &562528665989735714
 Animator:
   serializedVersion: 5

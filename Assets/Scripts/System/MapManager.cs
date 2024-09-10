@@ -21,11 +21,13 @@ namespace System
         private const int MapScaleX = 32;
         private const int MapScaleY = 16;
         private int _enemyType;
+        private AudioSource _audioSource;
         private List<EnemyPool> _enemyPools; // 敌人对象池
 
         private void Awake()
         {
             enemyBornTime = enemyBornInterval;
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Start()

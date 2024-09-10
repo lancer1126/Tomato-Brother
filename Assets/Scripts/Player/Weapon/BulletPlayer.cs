@@ -41,6 +41,7 @@ namespace Player.Weapon
 
         private void BulletExplosion()
         {
+            BulletEnd = true;
             Anim.SetTrigger(Explosion);
         }
 

@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5a1870917e4204b532ebacd4b09ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletIndex: 0
+  enemyCollisionFactor: 1
   attackRange: 10
   attackInterval: 1
   muzzle: {fileID: 0}
