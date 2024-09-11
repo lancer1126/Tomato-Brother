@@ -6,27 +6,29 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField]
-        private float speed = 300f;
+        private static readonly int IsMoving = Animator.StringToHash("isMoving");
+        
         [SerializeField]
         private Bag playerBag;
         [SerializeField]
         private PlayerStatus playerStatus;
         [SerializeField]
+        private HealthBar healthBar;
+        [SerializeField]
         private List<Vector2> weaponPosList;
-
-        private static readonly int IsMoving = Animator.StringToHash("isMoving");
-
+        private float _speed;
         private Vector3 _moveDir;
         private Animator _animator;
         private Rigidbody2D _rb2;
 
         private void Start()
         {
+            _speed = playerStatus.speed;
             _rb2 = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             LoadCharacter();
             LoadPlayerWeapon();
+            InitStatusBar();
         }
 
         private void FixedUpdate()
@@ -45,29 +47,21 @@ namespace Player
             if (_moveDir != Vector3.zero)
             {
                 _animator.SetBool(IsMoving, true);
-                var tls = transform.localScale;
-                // 检查水平输入方向是否与当前物体方向不同，若不同则翻转
-                if (!Mathf.Approximately(Mathf.Sign(h), Mathf.Sign(tls.x)))
+                // 转向
+                transform.rotation = h switch
                 {
-                    Flip(tls);
-                }
+                    > 0 => Quaternion.Euler(0, 0, 0),
+                    < 0 => Quaternion.Euler(0, 180, 0),
+                    _ => transform.rotation
+                };
 
-                _rb2.velocity = _moveDir * (speed * Time.deltaTime);
+                _rb2.velocity = _moveDir * (_speed * Time.deltaTime);
             }
             else
             {
                 _animator.SetBool(IsMoving, false);
                 _rb2.velocity = Vector2.zero;
             }
-        }
-
-        /// <summary>
-        /// 人物转向
-        /// </summary>
-        /// <param name="localScale"></param>
-        private void Flip(Vector3 localScale)
-        {
-            transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
         }
 
         /// <summary>
@@ -91,6 +85,13 @@ namespace Player
                 var weapon = Instantiate(playerBag.weaponList[i].weaponPrefab, transform);
                 weapon.transform.localPosition = weaponPosList[i];
             }
+        }
+        
+        private void InitStatusBar()
+        {
+            playerStatus.health = playerStatus.maxHealth;
+            healthBar.SetCurrentHealth(playerStatus.health);
+            healthBar.SetMaxHealth(playerStatus.maxHealth);
         }
     }
 }

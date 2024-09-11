@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 600
-  damage: 20
+  damage: 15
   forward: {x: 0, y: 0}
   maxPenetration: 2
   repelPower: 1000

@@ -121,9 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletIndex: 0
-  enemyCollisionFactor: 1
+  enemyCollisionFactor: 20
   attackRange: 10
-  attackInterval: 1
+  attackInterval: 0.5
+  targetChangeInterval: 0.5
   muzzle: {fileID: 0}
   fireAudio: {fileID: 8300000, guid: b63b056afc2fa0d4db7655d204b52e5d, type: 3}
 --- !u!1 &8536080030734436761

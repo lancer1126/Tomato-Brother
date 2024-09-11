@@ -32,6 +32,7 @@ namespace UI
 
         private void Start()
         {
+            bag.Init();
             LoadCharacter();
             LoadWeapon();
 
