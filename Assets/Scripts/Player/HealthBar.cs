@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Player
@@ -8,21 +7,16 @@ namespace Player
     {
         [SerializeField]
         private Slider slider;
-        [SerializeField]
-        private TMP_Text currentHealthText;
-        [SerializeField]
-        private TMP_Text maxHealthText;
 
-        public void SetCurrentHealth(int health)
+        public void SetCurrentHealth(float health)
         {
             slider.value = health;
-            currentHealthText.SetText(health.ToString());
+          
         }
 
-        public void SetMaxHealth(int maxHealth)
+        public void SetMaxHealth(float maxHealth)
         {
             slider.maxValue = maxHealth;
-            maxHealthText.SetText(maxHealth.ToString());
         }
     }
 }

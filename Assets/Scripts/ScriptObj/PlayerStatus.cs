@@ -6,9 +6,9 @@ namespace ScriptObj
     public class PlayerStatus : ScriptableObject
     {
         [Header("血量")]
-        public int maxHealth; //最大生命值
-        public int health; //当前生命值
-        public int healthRecover; //生命恢复量
+        public float maxHealth; //最大生命值
+        public float health; //当前生命值
+        public float healthRecover; //生命恢复量
 
         [Header("经验")]
         public uint level; //等级

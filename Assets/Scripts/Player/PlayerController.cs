@@ -7,7 +7,7 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
-        
+
         [SerializeField]
         private Bag playerBag;
         [SerializeField]
@@ -15,7 +15,10 @@ namespace Player
         [SerializeField]
         private HealthBar healthBar;
         [SerializeField]
+        private AudioClip hurtAudio;
+        [SerializeField]
         private List<Vector2> weaponPosList;
+        private bool _isDead;
         private float _speed;
         private Vector3 _moveDir;
         private Animator _animator;
@@ -36,11 +39,28 @@ namespace Player
             Move();
         }
 
+        public void TakeDamage(float damage)
+        {
+            var remainHealth = playerStatus.health - damage;
+            playerStatus.health = remainHealth <= 0 ? 0 : remainHealth;
+            healthBar.SetCurrentHealth(playerStatus.health);
+            
+            if (playerStatus.health == 0)
+            {
+                PlayerDie();
+            }
+        }
+
         /// <summary>
         /// 人物移动
         /// </summary>
         private void Move()
         {
+            if (_isDead)
+            {
+                return;
+            }
+            
             var h = Input.GetAxis("Horizontal");
             var v = Input.GetAxis("Vertical");
             _moveDir = new Vector3(h, v, 0).normalized;
@@ -86,12 +106,19 @@ namespace Player
                 weapon.transform.localPosition = weaponPosList[i];
             }
         }
-        
+
         private void InitStatusBar()
         {
             playerStatus.health = playerStatus.maxHealth;
             healthBar.SetCurrentHealth(playerStatus.health);
             healthBar.SetMaxHealth(playerStatus.maxHealth);
+        }
+
+        private void PlayerDie()
+        {
+            _isDead = true;
+            _rb2.velocity = Vector2.zero;
+            Time.timeScale = 0;
         }
     }
 }
