@@ -19,13 +19,15 @@ namespace Enemy
 
         [SerializeField]
         protected float attackInterval = 1;
+        [SerializeField]
+        public float enemyPushForce = 100;
         protected Action ReleaseAction; // 将对象回收到对象池方法
         protected Func<BaseEnemy> GetAction; // 从对象池中获取对象方法
         protected Vector3 ToPlayerDir; // 敌人与玩家的向量
         protected GameObject Player;
         protected Animator Anim;
         protected Rigidbody2D Rb2;
-        
+
         private bool _isHurt;
         private bool _isDead;
         private float _attackTimer;
@@ -65,7 +67,10 @@ namespace Enemy
         /// <param name="other"></param>
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            Attack(other);
+            if (other.CompareTag("Player"))
+            {
+                Attack(other);
+            }
         }
 
         /// <summary>
@@ -74,14 +79,17 @@ namespace Enemy
         /// <param name="other"></param>
         protected virtual void OnTriggerStay2D(Collider2D other)
         {
-            if (_attackTimer >= attackInterval)
+            if (other.CompareTag("Player"))
             {
-                Attack(other);
-                _attackTimer = 0;
-            }
-            else
-            {
-                _attackTimer += Time.deltaTime;
+                if (_attackTimer >= attackInterval)
+                {
+                    Attack(other);
+                    _attackTimer = 0;
+                }
+                else
+                {
+                    _attackTimer += Time.deltaTime;
+                }
             }
         }
 

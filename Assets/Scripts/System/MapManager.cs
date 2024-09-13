@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Pool;
+using TMPro;
 using UnityEngine;
 
 namespace System
@@ -16,31 +17,51 @@ namespace System
         [SerializeField]
         private float enemyBornTime; // 标记生成敌人
         [SerializeField]
-        private GameObject bornAnimation;
+        private GameObject bornAnimation; // 敌人出生动画
+        [SerializeField]
+        private GameObject gameOverMenu;
+        [SerializeField]
+        private TMP_Text gameTimeText;
 
         private const int MapScaleX = 32;
         private const int MapScaleY = 16;
         private int _enemyType;
-        private AudioSource _audioSource;
+        private AudioSource _bgm;
         private List<EnemyPool> _enemyPools; // 敌人对象池
 
         private void Awake()
         {
             enemyBornTime = enemyBornInterval;
-            _audioSource = GetComponent<AudioSource>();
+            _bgm = GetComponent<AudioSource>();
         }
 
         private void Start()
         {
             _enemyPools = PoolController.Instance.enemyPools;
             _enemyType = _enemyPools.Count;
+            if (gameTime == 0)
+            {
+                gameTime = 60;
+            }
         }
 
         private void Update()
         {
-            enemyBornTime += Time.deltaTime;
             gameTime -= Time.deltaTime;
+            if (gameTime <= 0)
+            {
+                _bgm.Stop();
+                gameTimeText.gameObject.SetActive(false);
+                gameOverMenu.SetActive(true);
+            }
+            else
+            {
+                gameTimeText.text = ((int)gameTime + 1).ToString();
+                gameTimeText.color = gameTime <= 10 ? Color.red : Color.white;
+            }
 
+            // 计算敌人出生
+            enemyBornTime += Time.deltaTime;
             if (enemyBornTime > enemyBornInterval)
             {
                 EnemyBorn();

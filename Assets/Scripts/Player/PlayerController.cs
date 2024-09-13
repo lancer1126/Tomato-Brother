@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cinemachine;
 using ScriptObj;
 using UnityEngine;
 
@@ -17,18 +18,22 @@ namespace Player
         [SerializeField]
         private AudioClip hurtAudio;
         [SerializeField]
+        private GameObject gameOverMenu;
+        [SerializeField]
         private List<Vector2> weaponPosList;
         private bool _isDead;
         private float _speed;
         private Vector3 _moveDir;
         private Animator _animator;
         private Rigidbody2D _rb2;
+        private CinemachineImpulseSource _impulseSource;
 
         private void Start()
         {
             _speed = playerStatus.speed;
             _rb2 = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
+            _impulseSource = GetComponent<CinemachineImpulseSource>();
             LoadCharacter();
             LoadPlayerWeapon();
             InitStatusBar();
@@ -41,6 +46,8 @@ namespace Player
 
         public void TakeDamage(float damage)
         {
+            AudioSource.PlayClipAtPoint(hurtAudio, transform.position);
+            _impulseSource.GenerateImpulse(0.1f);
             var remainHealth = playerStatus.health - damage;
             playerStatus.health = remainHealth <= 0 ? 0 : remainHealth;
             healthBar.SetCurrentHealth(playerStatus.health);
@@ -118,7 +125,7 @@ namespace Player
         {
             _isDead = true;
             _rb2.velocity = Vector2.zero;
-            Time.timeScale = 0;
+            gameOverMenu.SetActive(true);
         }
     }
 }

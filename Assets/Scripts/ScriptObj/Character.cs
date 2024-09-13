@@ -1,5 +1,4 @@
-﻿using UnityEditor.Animations;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ScriptObj
 {
@@ -8,6 +7,6 @@ namespace ScriptObj
     {
         public string characterName;
         public Sprite characterImg;
-        public AnimatorController characterAnimator;
+        public AnimatorOverrideController characterAnimator;
     }
 }

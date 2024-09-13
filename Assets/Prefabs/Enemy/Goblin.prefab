@@ -184,8 +184,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  attack: 2
+  damage: 10
   moveSpeed: 200
   maxHealth: 10
   currentHealth: 0
   forward: {x: 0, y: 0}
+  attackInterval: 1
+  enemyPushForce: 10
