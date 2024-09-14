@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec746e43bf0b476cbd36c6faedb4d83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 600
+  speed: 800
   damage: 10
   forward: {x: 0, y: 0}
   maxPenetration: 2

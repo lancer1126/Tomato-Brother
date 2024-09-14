@@ -127,6 +127,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   hurtAudio: {fileID: 8300000, guid: f06fa6e9dccb20442b6d6d2fad8cfc8a, type: 3}
   gameOverMenu: {fileID: 0}
+  gameStatus: {fileID: 11400000, guid: 2c50e745abaca174a9ced978b2cfc9ee, type: 2}
   weaponPosList:
   - {x: 0.68, y: 0}
   - {x: 1, y: -0.26}

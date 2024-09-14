@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using ScriptObj;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,10 +10,17 @@ namespace System
 
         [SerializeField]
         private TMP_Text title;
+        [SerializeField]
+        private GameStatus gameStatus;
 
         private void OnEnable()
         {
             ToActiveMenu();
+        }
+
+        private void OnDisable()
+        {
+            Time.timeScale = 1;
         }
 
         public void ToMainMenu()
@@ -25,10 +33,10 @@ namespace System
             Application.Quit();
         }
 
-        private void ToActiveMenu(bool isWin = false)
+        private void ToActiveMenu()
         {
             Time.timeScale = 0;
-            title.text = isWin ? "VICTORY" : "GAME OVER";
+            title.text =  gameStatus.overMenuText;
         }
     }
 }

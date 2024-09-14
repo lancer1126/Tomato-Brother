@@ -22,12 +22,14 @@ namespace UI
         private float _volume;
         private VisualElement _rootEl;
         private GameObject _weapon;
+        private Vector3 _cameraDefaultPos;
 
         private void Awake()
         {
             _rootEl = GetComponent<UIDocument>().rootVisualElement;
             _weapon = player.transform.Find("Weapon").gameObject;
             _volume = Setting.Instance.GetVolume() / 100f;
+            _cameraDefaultPos = new Vector3(0, 0, -10);
         }
 
         private void Start()
@@ -61,7 +63,7 @@ namespace UI
                     _characterIndex = index;
                     // 将当前Player动画替换为选中的Character的动画
                     playerAnimator.runtimeAnimatorController = item.characterAnimator;
-                    AudioSource.PlayClipAtPoint(confirmAudio, transform.position, _volume);
+                    AudioSource.PlayClipAtPoint(confirmAudio, _cameraDefaultPos, _volume);
                 }, TrickleDown.TrickleDown);
 
                 // 注册点击时的背景色变换回调方法
@@ -83,16 +85,16 @@ namespace UI
                 var weaponUI = weaponItemVta.Instantiate();
                 CustomWeaponStyle(weaponUI, item);
                 weaponListUI.Add(weaponUI);
-                
+
                 // 注册鼠标点击回调方法
                 weaponUI.RegisterCallback<MouseUpEvent>(evt =>
                 {
                     _weaponIndex = index;
                     // 在武器列表中点击后将玩家的武器替换为选中的
                     weaponSprite.sprite = item.weaponImg;
-                    AudioSource.PlayClipAtPoint(confirmAudio, transform.position, _volume);
+                    AudioSource.PlayClipAtPoint(confirmAudio, _cameraDefaultPos, _volume);
                 }, TrickleDown.TrickleDown);
-                
+
                 SetItemEvent(weaponUI, "item");
             }
         }
@@ -116,7 +118,7 @@ namespace UI
             itemElement.style.paddingTop = 20;
             itemElement.style.paddingBottom = 20;
         }
-        
+
         private void CustomWeaponStyle(TemplateContainer itemUI, Weapon item)
         {
             // UI中WeaponItem元素的背景图片设置为预设的

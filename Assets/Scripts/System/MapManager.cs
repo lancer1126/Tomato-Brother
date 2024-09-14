@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Pool;
+using ScriptObj;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace System
 {
@@ -22,9 +24,14 @@ namespace System
         private GameObject gameOverMenu;
         [SerializeField]
         private TMP_Text gameTimeText;
+        [SerializeField]
+        private TMP_Text waveText;
+        [SerializeField]
+        private GameStatus gameStatus;
 
         private const int MapScaleX = 32;
         private const int MapScaleY = 16;
+        private bool _isPauseOpen;
         private int _enemyType;
         private AudioSource _bgm;
         private List<EnemyPool> _enemyPools; // 敌人对象池
@@ -33,26 +40,38 @@ namespace System
         {
             enemyBornTime = enemyBornInterval;
             _bgm = GetComponent<AudioSource>();
+            if (gameStatus.wave == 0)
+            {
+                gameStatus.wave = 1;
+            }
         }
 
         private void Start()
         {
             _enemyPools = PoolController.Instance.enemyPools;
             _enemyType = _enemyPools.Count;
-            if (gameTime == 0)
-            {
-                gameTime = 60;
-            }
+            InitWave();
+            EnemyBorn();
         }
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _isPauseOpen = !_isPauseOpen;
+                if (_isPauseOpen)
+                {
+                    GamePause();
+                    return;
+                }
+
+                GameProceeding();
+            }
+
             gameTime -= Time.deltaTime;
             if (gameTime <= 0)
             {
-                _bgm.Stop();
-                gameTimeText.gameObject.SetActive(false);
-                gameOverMenu.SetActive(true);
+                NextLevel();
             }
             else
             {
@@ -97,6 +116,45 @@ namespace System
             // 3秒加载动画后生成敌人
             var enemyInstance = _enemyPools[enemyIndex].GetFromPool();
             enemyInstance.transform.position = position;
+        }
+
+        private void GamePause()
+        {
+            gameStatus.overMenuText = "PAUSE";
+            gameOverMenu.SetActive(true);
+        }
+
+        private void GameProceeding()
+        {
+            gameOverMenu.SetActive(false);
+        }
+
+        private void NextLevel()
+        {
+            gameTimeText.gameObject.SetActive(false);
+            SceneManager.LoadScene("Shop");
+        }
+
+        private void InitWave()
+        {
+            if (gameTime == 0)
+            {
+                gameTime = 30;
+            }
+
+            enemyBornCount *= gameStatus.wave;
+            if (enemyBornCount > 20)
+            {
+                enemyBornCount = 20;
+            }
+
+            enemyBornInterval += gameStatus.wave - 1;
+            if (enemyBornInterval > 5)
+            {
+                enemyBornInterval = 5;
+            }
+
+            waveText.text = "第" + gameStatus.wave + "轮";
         }
     }
 }

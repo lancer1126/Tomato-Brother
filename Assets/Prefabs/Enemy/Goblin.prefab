@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  damage: 10
+  damage: 20
   moveSpeed: 200
   maxHealth: 10
   currentHealth: 0

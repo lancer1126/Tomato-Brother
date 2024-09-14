@@ -20,6 +20,8 @@ namespace Player
         [SerializeField]
         private GameObject gameOverMenu;
         [SerializeField]
+        private GameStatus gameStatus;
+        [SerializeField]
         private List<Vector2> weaponPosList;
         private bool _isDead;
         private float _speed;
@@ -47,7 +49,7 @@ namespace Player
         public void TakeDamage(float damage)
         {
             AudioSource.PlayClipAtPoint(hurtAudio, transform.position);
-            _impulseSource.GenerateImpulse(0.1f);
+            _impulseSource.GenerateImpulse(0.2f);
             var remainHealth = playerStatus.health - damage;
             playerStatus.health = remainHealth <= 0 ? 0 : remainHealth;
             healthBar.SetCurrentHealth(playerStatus.health);
@@ -125,6 +127,7 @@ namespace Player
         {
             _isDead = true;
             _rb2.velocity = Vector2.zero;
+            gameStatus.overMenuText = "GAME OVER";
             gameOverMenu.SetActive(true);
         }
     }

@@ -27,13 +27,11 @@ namespace System
 
         public void OpenSetting()
         {
-            Debug.Log("打开设置");
             settingUI.SetActive(true);
         }
 
         public void QuitGame()
         {
-            Debug.Log("退出游戏");
             Application.Quit();
         }
     }
