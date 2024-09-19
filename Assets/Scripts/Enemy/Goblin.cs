@@ -1,7 +1,4 @@
 ﻿namespace Enemy
 {
-    public class Goblin : BaseEnemy
-    {
-        
-    }
+    public class Goblin : BaseEnemy { }
 }

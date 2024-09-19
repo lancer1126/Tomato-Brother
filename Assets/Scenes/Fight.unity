@@ -31797,6 +31797,8 @@ MonoBehaviour:
   poolBulletGroup: {fileID: 1992449386}
   enemyTypes:
   - {fileID: 6227964141164645452, guid: 4a15eafcba24f984391240fc255fc201, type: 3}
+  - {fileID: 5579164687376500016, guid: fab1bf037048d4f4c8a30e1db24c7f1f, type: 3}
+  - {fileID: -3410300861696352887, guid: fdf3223bb21ce824bb1c38d19fd07504, type: 3}
   bulletTypes:
   - {fileID: 346403780792937949, guid: a8fc750a9762f36489dd51822df9713e, type: 3}
   - {fileID: 346403780792937949, guid: 422c0d9fe8ac87e4587459d21e5a8707, type: 3}

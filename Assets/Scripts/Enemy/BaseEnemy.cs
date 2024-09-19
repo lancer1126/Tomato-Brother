@@ -27,10 +27,9 @@ namespace Enemy
         protected GameObject Player;
         protected Animator Anim;
         protected Rigidbody2D Rb2;
-
-        private bool _isHurt;
-        private bool _isDead;
-        private float _attackTimer;
+        protected bool IsHurt;
+        protected bool Dead;
+        protected float AttackTimer;
 
         protected virtual void Awake()
         {
@@ -42,14 +41,14 @@ namespace Enemy
         protected virtual void OnEnable()
         {
             currentHealth = maxHealth;
-            _isDead = false;
-            _isHurt = false;
+            Dead = false;
+            IsHurt = false;
         }
 
         protected virtual void FixedUpdate()
         {
             ToPlayerDir = Player.transform.position - transform.position;
-            if (_isDead || _isHurt)
+            if (Dead || IsHurt)
             {
                 Rb2.velocity = Vector2.zero;
             }
@@ -79,17 +78,19 @@ namespace Enemy
         /// <param name="other"></param>
         protected virtual void OnTriggerStay2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (!other.CompareTag("Player"))
             {
-                if (_attackTimer >= attackInterval)
-                {
-                    Attack(other);
-                    _attackTimer = 0;
-                }
-                else
-                {
-                    _attackTimer += Time.deltaTime;
-                }
+                return;
+            }
+
+            if (AttackTimer >= attackInterval)
+            {
+                Attack(other);
+                AttackTimer = 0;
+            }
+            else
+            {
+                AttackTimer += Time.deltaTime;
             }
         }
 
@@ -109,7 +110,7 @@ namespace Enemy
         /// <param name="hurtDamage"></param>
         public virtual void TakeDamage(int hurtDamage)
         {
-            if (_isDead)
+            if (Dead)
             {
                 return;
             }
@@ -163,27 +164,14 @@ namespace Enemy
 
         protected virtual void Die()
         {
-            _isDead = true;
+            Dead = true;
             Anim.SetBool(IsDead, true);
-        }
-
-        protected void RecycleEnemy()
-        {
-            ReleaseAction?.Invoke();
-        }
-
-        private IEnumerator ToRepel(Vector3 power)
-        {
-            _isHurt = true;
-            Rb2.AddForce(power, ForceMode2D.Impulse);
-            yield return new WaitForSeconds(0.1f);
-            _isHurt = false;
         }
 
         /// <summary>
         /// 对玩家进行攻击
         /// </summary>
-        private void Attack(Collider2D other)
+        protected virtual void Attack(Collider2D other)
         {
             var otherObj = other.gameObject;
             if (!otherObj.tag.Equals("Player"))
@@ -193,6 +181,19 @@ namespace Enemy
 
             var playerController = other.gameObject.GetComponent<PlayerController>();
             playerController?.TakeDamage(damage);
+        }
+
+        protected void RecycleEnemy()
+        {
+            ReleaseAction?.Invoke();
+        }
+
+        private IEnumerator ToRepel(Vector3 power)
+        {
+            IsHurt = true;
+            Rb2.AddForce(power, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.1f);
+            IsHurt = false;
         }
     }
 }
