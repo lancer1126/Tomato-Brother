@@ -8,15 +8,19 @@ namespace Enemy
 
         [SerializeField]
         private int bornChildCount; // 死亡后生成子敌人
-        private int _bornLevel; // 当前已生成第几轮子敌人
 
         protected override void Die()
         {
             ReleaseAction.Invoke();
-            _bornLevel++;
-            if (_bornLevel < 2)
+            Anim.SetBool(IsDead, true);
+            if (bornLevel < 1)
             {
                 BornChild();
+            }
+            else
+            {
+                Dead = true;
+                CheckGetGold(2);
             }
         }
 
@@ -34,6 +38,7 @@ namespace Enemy
                 child.transform.position = basePos + new Vector3(randomX, 0, 0);
                 child.transform.localScale = childScale;
                 child.currentHealth = maxHealth / 2;
+                child.bornLevel++;
             }
         }
     }

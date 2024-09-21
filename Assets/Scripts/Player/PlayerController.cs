@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using Cinemachine;
 using ScriptObj;
+using TMPro;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerController Instance { get; private set; }
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
         [SerializeField]
@@ -22,6 +24,8 @@ namespace Player
         [SerializeField]
         private GameStatus gameStatus;
         [SerializeField]
+        private TMP_Text goldText;
+        [SerializeField]
         private List<Vector2> weaponPosList;
         private bool _isDead;
         private float _speed;
@@ -29,6 +33,11 @@ namespace Player
         private Animator _animator;
         private Rigidbody2D _rb2;
         private CinemachineImpulseSource _impulseSource;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
@@ -53,11 +62,20 @@ namespace Player
             var remainHealth = playerStatus.health - damage;
             playerStatus.health = remainHealth <= 0 ? 0 : remainHealth;
             healthBar.SetCurrentHealth(playerStatus.health);
-            
+
             if (playerStatus.health == 0)
             {
                 PlayerDie();
             }
+        }
+
+        /// <summary>
+        /// 拾取金币
+        /// </summary>
+        public void AddGold(int value)
+        {
+            playerStatus.goldValue += value;
+            goldText.SetText(playerStatus.goldValue.ToString());
         }
 
         /// <summary>
@@ -69,7 +87,7 @@ namespace Player
             {
                 return;
             }
-            
+
             var h = Input.GetAxis("Horizontal");
             var v = Input.GetAxis("Vertical");
             _moveDir = new Vector3(h, v, 0).normalized;
@@ -121,6 +139,7 @@ namespace Player
             playerStatus.health = playerStatus.maxHealth;
             healthBar.SetCurrentHealth(playerStatus.health);
             healthBar.SetMaxHealth(playerStatus.maxHealth);
+            goldText.SetText(playerStatus.goldValue.ToString());
         }
 
         private void PlayerDie()

@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections;
 using Player;
+using Pool;
 using UnityEngine;
 
 namespace Enemy
 {
     public class BaseEnemy : MonoBehaviour
     {
-        private static readonly int IsRun = Animator.StringToHash("isRun");
-        private static readonly int IsDead = Animator.StringToHash("isDead");
+        protected static readonly int IsRun = Animator.StringToHash("isRun");
+        protected static readonly int IsDead = Animator.StringToHash("isDead");
 
         public int level;
         public int damage = 10;
+        public int bornLevel; // 当前父对象已生成第几级子对象
         public float moveSpeed;
         public float maxHealth;
         public float currentHealth;
@@ -171,6 +173,22 @@ namespace Enemy
         {
             Dead = true;
             Anim.SetBool(IsDead, true);
+            CheckGetGold();
+        }
+
+        /// <summary>
+        /// 计算是否生成金币
+        /// </summary>
+        protected virtual void CheckGetGold(int goldVal = 3)
+        {
+            var random = UnityEngine.Random.Range(1, 4);
+            if (random != 1)
+            {
+                return;
+            }
+            var gold = GoldPool.Instance.GetFromPool();
+            gold.SetGoldValue(goldVal);
+            gold.transform.position = transform.position;
         }
 
         /// <summary>
