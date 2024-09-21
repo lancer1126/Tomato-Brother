@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Enemy;
 using Player.Weapon;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Pool
 {
     public class PoolController : MonoBehaviour
     {
-        public static PoolController Instance { get; set; }
+        public static PoolController Instance { get; private set; }
 
         public List<EnemyPool> enemyPools;
         public List<BulletPool> bulletPools;
+        public List<BulletPool> enemyBulletPools;
 
         [SerializeField]
         private Transform poolEnemyGroup;
@@ -22,6 +21,8 @@ namespace Pool
         private BaseEnemy[] enemyTypes;
         [SerializeField]
         private Bullet[] bulletTypes;
+        [SerializeField]
+        private Bullet[] enemyBulletTypes;
 
         private void Awake()
         {
@@ -47,6 +48,7 @@ namespace Pool
         {
             InitEnemyPool();
             InitBulletPool();
+            InitEnemyBulletPool();
         }
 
         private void InitEnemyPool()
@@ -87,6 +89,26 @@ namespace Pool
                 pool.SetPrefab(bullet);
                 
                 bulletPools.Add(pool);
+            }
+        }
+
+        private void InitEnemyBulletPool()
+        {
+            enemyBulletPools = new List<BulletPool>();
+            foreach (var bullet in enemyBulletTypes)
+            {
+                var poolHolder = new GameObject($"Pool-{bullet.name}")
+                {
+                    transform =
+                    {
+                        parent = poolBulletGroup,
+                        position = transform.position
+                    }
+                };
+                var pool = poolHolder.AddComponent<BulletPool>();
+                pool.SetPrefab(bullet);
+                
+                enemyBulletPools.Add(pool);
             }
         }
     }

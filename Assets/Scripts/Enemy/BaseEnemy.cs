@@ -47,17 +47,7 @@ namespace Enemy
 
         protected virtual void FixedUpdate()
         {
-            ToPlayerDir = Player.transform.position - transform.position;
-            if (Dead || IsHurt)
-            {
-                Rb2.velocity = Vector2.zero;
-            }
-            else
-            {
-                // 向玩家方向移动
-                forward = ToPlayerDir.normalized;
-                Move();
-            }
+            MoveToPlayer();
         }
 
         /// <summary>
@@ -140,6 +130,21 @@ namespace Enemy
             StartCoroutine(ToRepel(dir * repelPower));
         }
 
+        protected virtual void MoveToPlayer()
+        {
+            ToPlayerDir = Player.transform.position - transform.position;
+            if (Dead || IsHurt)
+            {
+                Rb2.velocity = Vector2.zero;
+            }
+            else
+            {
+                // 向玩家方向移动
+                forward = ToPlayerDir.normalized;
+                Move();
+            }
+        }
+
         protected virtual void Move()
         {
             if (ToPlayerDir.magnitude > 0.5f)
@@ -186,6 +191,17 @@ namespace Enemy
         protected void RecycleEnemy()
         {
             ReleaseAction?.Invoke();
+        }
+
+        /// <summary>
+        /// 获取随机方向
+        /// </summary>
+        /// <returns></returns>
+        protected Vector2 GetRandomV2()
+        {
+            var x = UnityEngine.Random.Range(-1, 2);
+            var y = UnityEngine.Random.Range(-1, 2);
+            return new Vector2(x, y);
         }
 
         private IEnumerator ToRepel(Vector3 power)

@@ -1,5 +1,4 @@
-﻿using System;
-using Player.Weapon;
+﻿using Player.Weapon;
 using UnityEngine;
 
 namespace Pool

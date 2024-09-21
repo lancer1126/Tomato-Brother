@@ -191,3 +191,4 @@ MonoBehaviour:
   forward: {x: 0, y: 0}
   attackInterval: 1
   enemyPushForce: 100
+  bornChildCount: 2

@@ -31793,6 +31793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPools: []
   bulletPools: []
+  enemyBulletPools: []
   poolEnemyGroup: {fileID: 458965906}
   poolBulletGroup: {fileID: 1992449386}
   enemyTypes:
@@ -31802,6 +31803,8 @@ MonoBehaviour:
   bulletTypes:
   - {fileID: 346403780792937949, guid: a8fc750a9762f36489dd51822df9713e, type: 3}
   - {fileID: 346403780792937949, guid: 422c0d9fe8ac87e4587459d21e5a8707, type: 3}
+  enemyBulletTypes:
+  - {fileID: 1606172565302842958, guid: 20f0999731370d749b8cb9af60b7ef2c, type: 3}
 --- !u!1 &2088633308
 GameObject:
   m_ObjectHideFlags: 0
