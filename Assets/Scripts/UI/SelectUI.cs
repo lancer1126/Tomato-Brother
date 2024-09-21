@@ -101,7 +101,7 @@ namespace UI
 
         private void GoToFight()
         {
-            AudioSource.PlayClipAtPoint(confirmAudio, transform.position, _volume);
+            AudioSource.PlayClipAtPoint(confirmAudio, _cameraDefaultPos, _volume);
             bag.character = shopProduct.characterList[_characterIndex];
             bag.weaponList.Add(shopProduct.weaponList[_weaponIndex]);
             SceneManager.LoadScene("Fight");

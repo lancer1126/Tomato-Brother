@@ -2626,7 +2626,7 @@ MonoBehaviour:
   bag: {fileID: 11400000, guid: 6a04348c74126884787e52ada275b293, type: 2}
   settingUI: {fileID: 1422758879}
   gameStatus: {fileID: 11400000, guid: 2c50e745abaca174a9ced978b2cfc9ee, type: 2}
-  playerStatus: {fileID: 11400000, guid: d07cc2d93479d054b8cef97d1db033e0, type: 2}
+  playerStatus: {fileID: 11400000, guid: 9e0e52c0fc004dc459b04a566cd73678, type: 2}
 --- !u!1 &1315523910
 GameObject:
   m_ObjectHideFlags: 0

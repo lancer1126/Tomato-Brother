@@ -35,22 +35,7 @@ namespace ScriptObj
 
         public void Init()
         {
-            maxHealth = 50;
-            healthRecover = 0;
-            level = 1;
-            maxExp = 100;
-            currentExp = 0;
-            attack = 0;
-            attackSpeed = 0;
-            criticalRate = 0;
-            criticalDamage = 0;
-            attackRange = 0;
-            armor = 0;
-            dodgeRate = 0;
-            speed = 0;
-            pickUpRange = 0;
             goldValue = 0;
-            weaponSlot = 6;
         }
     }
 }
