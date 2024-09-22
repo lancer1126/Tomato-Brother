@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cinemachine;
+using Pool;
 using ScriptObj;
 using TMPro;
 using UnityEngine;
@@ -58,7 +59,11 @@ namespace Player
         public void TakeDamage(float damage)
         {
             AudioSource.PlayClipAtPoint(hurtAudio, transform.position);
+            // 受攻击时镜头抖动
             _impulseSource.GenerateImpulse(0.2f);
+            // 出现生命减少提示
+            TextPool.Instance.GetText(transform.position, "-" + damage, 6);
+
             var remainHealth = playerStatus.health - damage;
             playerStatus.health = remainHealth <= 0 ? 0 : remainHealth;
             healthBar.SetCurrentHealth(playerStatus.health);
