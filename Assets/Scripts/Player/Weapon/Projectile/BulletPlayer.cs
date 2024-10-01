@@ -1,20 +1,18 @@
 ﻿using Enemy;
+using Player.Weapon.Ranged;
 using UnityEngine;
 
 namespace Player.Weapon.Projectile
 {
     public class BulletPlayer : Bullet
     {
-        [SerializeField]
-        protected int maxPenetration = 1; // 子弹最大贯通数
-        [SerializeField]
-        protected float repelPower; // 子弹把敌人击退的力
+        protected int MaxPenetration; // 子弹最大贯通数
         protected int CurPenetration; // 当前剩余的贯通数
+        protected float RepelPower; // 子弹把敌人击退的力
         protected Animator Anim;
 
         private void OnEnable()
         {
-            CurPenetration = maxPenetration;
             Anim = GetComponent<Animator>();
         }
 
@@ -30,7 +28,7 @@ namespace Player.Weapon.Projectile
                 CurPenetration--;
                 var enemy = other.gameObject.GetComponent<BaseEnemy>();
                 enemy.TakeDamage(Damage);
-                enemy.TakeRepel(transform, repelPower);
+                enemy.TakeRepel(transform, RepelPower);
 
                 if (CurPenetration <= 0)
                 {
@@ -46,6 +44,14 @@ namespace Player.Weapon.Projectile
             {
                 BulletEnd();
             }
+        }
+
+        public override void InitFromWeapon(RangedWeapon weapon)
+        {
+            base.InitFromWeapon(weapon);
+            MaxPenetration = weapon.bulletMaxPenetration;
+            RepelPower = weapon.bulletRepelPower;
+            CurPenetration = MaxPenetration;
         }
 
         private void BulletEnd()

@@ -5,19 +5,17 @@ namespace Player.Weapon.Ranged
 {
     public class RangedWeapon : BaseWeapon
     {
+        public int bulletMaxPenetration;
+        public float bulletSpeed;
+        public float bulletRepelPower;
         [SerializeField]
         protected float recoil; // 后坐力
         [SerializeField]
         protected GameObject muzzle; // 发射子弹的枪口
-        [SerializeField]
-        protected GameObject bulletPoolObj;    // 子弹池子对象
-        [SerializeField]
-        protected GameObject bullet;
-        protected BulletPool BulletPool; // 子弹池
 
-        protected override void OnEnable()
+        protected override void Awake()
         {
-            BulletPool = bulletPoolObj.GetComponent<BulletPool>();
+            haveBullet = true;
         }
 
         protected override void Init()
@@ -53,10 +51,10 @@ namespace Player.Weapon.Ranged
         {
             AudioSource.PlayClipAtPoint(attackAudio, muzzle.transform.position);
             
-            var bulletIns = BulletPool.GetFromPool();
+            var bulletIns = PoolController.Instance.BulletDict[weaponName].GetFromPool();
             bulletIns.transform.position = muzzle.transform.position;
             bulletIns.transform.rotation = muzzle.transform.rotation;
-            bulletIns.SetDamage(damage);
+            bulletIns.InitFromWeapon(this);
         }
 
         /// <summary>

@@ -5,25 +5,15 @@ namespace Pool
 {
     public class BulletPool : BasePool<Bullet>
     {
-        private Transform storeTo;
-
         private void Start()
         {
             InitPool();
         }
 
-        /// <summary>
-        /// 设置子弹对象生成的父对象
-        /// </summary>
-        /// <param name="t"></param>
-        public void SetStoreTo(Transform t)
-        {
-            storeTo = t;
-        }
-
         protected override Bullet ToCreate()
         {
             var ins = Instantiate(prefab, transform);
+            ins.transform.SetParent(transform, true);
             ins.SetDeactivateAction(delegate { ToRelease(ins); });
 
             return ins;

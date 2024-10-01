@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Enemy;
+using Player.Weapon;
 using Player.Weapon.Projectile;
+using ScriptObj;
 using UnityEngine;
 
 namespace Pool
@@ -10,17 +12,17 @@ namespace Pool
         public static PoolController Instance { get; private set; }
 
         public List<EnemyPool> enemyPools;
-        public List<BulletPool> bulletPools;
         public List<BulletPool> enemyBulletPools;
+        public Dictionary<string, BulletPool> BulletDict;
 
+        [SerializeField]
+        private Bag playerBag;
         [SerializeField]
         private Transform poolEnemyGroup;
         [SerializeField]
         private Transform poolBulletGroup;
         [SerializeField]
         private BaseEnemy[] enemyTypes;
-        [SerializeField]
-        private Bullet[] bulletTypes;
         [SerializeField]
         private Bullet[] enemyBulletTypes;
 
@@ -47,7 +49,7 @@ namespace Pool
         private void InitPool()
         {
             InitEnemyPool();
-            // InitBulletPool();
+            InitBulletPool();
             InitEnemyBulletPool();
         }
 
@@ -74,10 +76,17 @@ namespace Pool
 
         private void InitBulletPool()
         {
-            bulletPools = new List<BulletPool>();
-            foreach (var bullet in bulletTypes)
+            BulletDict = new Dictionary<string, BulletPool>();
+            foreach (var weapon in playerBag.weaponList)
             {
-                var poolHolder = new GameObject($"Pool-{bullet.name}")
+                var baseWeapon = weapon.weaponPrefab.GetComponent<BaseWeapon>();
+                var haveBullet = baseWeapon.haveBullet;
+                if (!haveBullet)
+                {
+                    return;
+                }
+                
+                var poolHolder = new GameObject($"Pool-{weapon.name}")
                 {
                     transform =
                     {
@@ -86,9 +95,9 @@ namespace Pool
                     }
                 };
                 var pool = poolHolder.AddComponent<BulletPool>();
-                pool.SetPrefab(bullet);
+                pool.SetPrefab(baseWeapon.bullet);
                 
-                bulletPools.Add(pool);
+                BulletDict.Add(weapon.WeaponName, pool);
             }
         }
 

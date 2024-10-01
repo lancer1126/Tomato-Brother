@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cinemachine;
+using Player.Weapon;
 using Pool;
 using ScriptObj;
 using TMPro;
@@ -47,7 +48,7 @@ namespace Player
             _animator = GetComponent<Animator>();
             _impulseSource = GetComponent<CinemachineImpulseSource>();
             LoadCharacter();
-            LoadPlayerWeapon();
+            LoadWeapon();
             InitStatusBar();
         }
 
@@ -130,12 +131,16 @@ namespace Player
         /// <summary>
         /// 加载武器并初始化武器位置
         /// </summary>
-        private void LoadPlayerWeapon()
+        private void LoadWeapon()
         {
             for (var i = 0; i < playerBag.weaponList.Count; i++)
             {
                 var weapon = Instantiate(playerBag.weaponList[i].weaponPrefab, transform);
                 weapon.transform.localPosition = weaponPosList[i];
+                
+                var baseWeapon = weapon.GetComponent<BaseWeapon>();
+                baseWeapon.weaponIndex = i;
+                baseWeapon.weaponName = playerBag.weaponList[i].WeaponName;
             }
         }
 

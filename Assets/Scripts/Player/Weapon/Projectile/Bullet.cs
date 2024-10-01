@@ -1,12 +1,12 @@
 ﻿using System;
+using Player.Weapon.Ranged;
 using UnityEngine;
 
 namespace Player.Weapon.Projectile
 {
     public class Bullet : MonoBehaviour
     {
-        public int speed;
-
+        protected float Speed;
         protected bool IsBulletEnd;
         protected float Damage;
         protected Vector2 Forward;
@@ -21,7 +21,6 @@ namespace Player.Weapon.Projectile
         protected virtual void Start()
         {
             Forward = transform.right.normalized;
-            transform.parent = null;
         }
 
         protected virtual void FixedUpdate()
@@ -32,13 +31,14 @@ namespace Player.Weapon.Projectile
             }
             else
             {
-                Rb2.velocity = Forward * (speed * Time.deltaTime);
+                Rb2.velocity = Forward * (Speed * Time.deltaTime);
             }
         }
 
-        public void SetDamage(float val)
+        public virtual void InitFromWeapon(RangedWeapon weapon)
         {
-            Damage = val;
+            Speed = weapon.bulletSpeed;
+            Damage = weapon.damage;
         }
 
         public void SetDeactivateAction(Action ra)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Player.Weapon.Projectile;
 using UnityEngine;
 using Util;
 
@@ -7,9 +8,13 @@ namespace Player.Weapon
 {
     public class BaseWeapon : MonoBehaviour
     {
+        public bool haveBullet; // 是否有子弹组件
         public int level; // 等级
+        public int weaponIndex = -1; // 当前武器在背包中的索引
         public float damage; // 伤害
-
+        public string weaponName; // 武器名称
+        public Bullet bullet; //子弹组件
+        
         [SerializeField]
         protected int enemyDetectCount; // 一次检测敌人的数量
         [SerializeField]
@@ -29,7 +34,7 @@ namespace Player.Weapon
         protected Vector3 DefaultRotate; // 武器默认的旋转角度
         protected GameObject AttackTarget; // 攻击的目标
 
-        protected virtual void OnEnable() { }
+        protected virtual void Awake() { }
 
         protected virtual void Start()
         {
