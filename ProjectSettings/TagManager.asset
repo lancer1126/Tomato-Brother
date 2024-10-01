@@ -15,7 +15,7 @@ TagManager:
   - Wall
   - Player
   - Enemy
-  - 
+  - Weapon
   - 
   - 
   - 
@@ -41,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 4275840467
+    locked: 0
+  - name: Weapon
+    uniqueID: 131338805
     locked: 0

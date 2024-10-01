@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enemy;
-using Player.Weapon;
+using Player.Weapon.Projectile;
 using UnityEngine;
 
 namespace Pool
@@ -47,7 +47,7 @@ namespace Pool
         private void InitPool()
         {
             InitEnemyPool();
-            InitBulletPool();
+            // InitBulletPool();
             InitEnemyBulletPool();
         }
 

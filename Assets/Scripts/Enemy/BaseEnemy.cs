@@ -100,7 +100,7 @@ namespace Enemy
         /// 被子弹击中时扣除血量
         /// </summary>
         /// <param name="hurtDamage"></param>
-        public virtual void TakeDamage(int hurtDamage)
+        public virtual void TakeDamage(float hurtDamage)
         {
             if (Dead)
             {
