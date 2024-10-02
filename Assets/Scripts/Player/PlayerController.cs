@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cinemachine;
 using Player.Weapon;
 using Pool;
@@ -59,7 +60,7 @@ namespace Player
 
         public void TakeDamage(float damage)
         {
-            AudioSource.PlayClipAtPoint(hurtAudio, transform.position);
+            AudioManager.Instance.Play(hurtAudio, transform.position);
             // 受攻击时镜头抖动
             _impulseSource.GenerateImpulse(0.2f);
             // 出现生命减少提示

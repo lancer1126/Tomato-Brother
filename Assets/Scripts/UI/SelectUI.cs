@@ -63,7 +63,7 @@ namespace UI
                     _characterIndex = index;
                     // 将当前Player动画替换为选中的Character的动画
                     playerAnimator.runtimeAnimatorController = item.characterAnimator;
-                    AudioSource.PlayClipAtPoint(confirmAudio, _cameraDefaultPos, _volume);
+                    AudioManager.Instance.Play(confirmAudio, _cameraDefaultPos);
                 }, TrickleDown.TrickleDown);
 
                 // 注册点击时的背景色变换回调方法
@@ -92,7 +92,7 @@ namespace UI
                     _weaponIndex = index;
                     // 在武器列表中点击后将玩家的武器替换为选中的
                     weaponSprite.sprite = item.weaponImg;
-                    AudioSource.PlayClipAtPoint(confirmAudio, _cameraDefaultPos, _volume);
+                    AudioManager.Instance.Play(confirmAudio, _cameraDefaultPos);
                 }, TrickleDown.TrickleDown);
 
                 SetItemEvent(weaponUI, "item");
@@ -101,7 +101,7 @@ namespace UI
 
         private void GoToFight()
         {
-            AudioSource.PlayClipAtPoint(confirmAudio, _cameraDefaultPos, _volume);
+            AudioManager.Instance.Play(confirmAudio, _cameraDefaultPos);
             bag.character = shopProduct.characterList[_characterIndex];
             bag.weaponList.Add(shopProduct.weaponList[_weaponIndex]);
             SceneManager.LoadScene("Fight");

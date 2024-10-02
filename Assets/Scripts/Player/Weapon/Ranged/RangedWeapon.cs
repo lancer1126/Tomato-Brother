@@ -1,4 +1,5 @@
-﻿using Pool;
+﻿using System;
+using Pool;
 using UnityEngine;
 
 namespace Player.Weapon.Ranged
@@ -49,7 +50,7 @@ namespace Player.Weapon.Ranged
         /// </summary>
         protected virtual void OpenFire()
         {
-            AudioSource.PlayClipAtPoint(attackAudio, muzzle.transform.position);
+            AudioManager.Instance.Play(attackAudio, muzzle.transform.position, 0.1f);
             
             var bulletIns = PoolController.Instance.BulletDict[weaponName].GetFromPool();
             bulletIns.transform.position = muzzle.transform.position;

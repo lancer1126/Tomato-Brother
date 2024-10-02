@@ -1,4 +1,5 @@
-﻿using Pool;
+﻿using System;
+using Pool;
 using UnityEngine;
 
 namespace Player.Loot
@@ -40,7 +41,7 @@ namespace Player.Loot
                 return;
             }
 
-            AudioSource.PlayClipAtPoint(gainAudio, transform.position);
+            AudioManager.Instance.Play(gainAudio, transform.position, 0.5f);
             _playerController.AddGold(goldValue);
             GoldPool.Instance.ReleaseFromPool(this);
         }
