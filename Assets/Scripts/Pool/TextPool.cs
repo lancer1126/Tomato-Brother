@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Effect;
+using TMPro;
 using UI;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace Pool
         protected override HurtText ToCreate()
         {
             var ins = Instantiate(prefab, transform);
-            ins.SetActiveAction(delegate { ReleaseFromPool(ins); });
+            ins.SetDeactivateAction(delegate { ReleaseFromPool(ins); });
             return ins;
         }
 

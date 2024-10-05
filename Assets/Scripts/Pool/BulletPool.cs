@@ -13,7 +13,6 @@ namespace Pool
         protected override Bullet ToCreate()
         {
             var ins = Instantiate(prefab, transform);
-            ins.transform.SetParent(transform, true);
             ins.SetDeactivateAction(delegate { ToRelease(ins); });
 
             return ins;

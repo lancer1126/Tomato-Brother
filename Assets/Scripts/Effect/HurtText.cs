@@ -3,7 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-namespace UI
+namespace Effect
 {
     public class HurtText : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace UI
             StartCoroutine(HideText());
         }
 
-        public void SetActiveAction(Action releaseObj)
+        public void SetDeactivateAction(Action releaseObj)
         {
             _releaseAction = releaseObj;
         }

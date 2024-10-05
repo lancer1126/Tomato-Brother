@@ -12,14 +12,14 @@ namespace Enemy
         protected override void Die()
         {
             ReleaseAction.Invoke();
-            Anim.SetBool(IsDead, true);
+            Anim.SetBool(AnimIsDead, true);
             if (bornLevel < 1)
             {
                 BornChild();
             }
             else
             {
-                Dead = true;
+                IsDead = true;
                 CheckGetGold(2);
             }
         }

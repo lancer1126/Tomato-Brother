@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6270190219147142146}
   - component: {fileID: 4300235087859248254}
   - component: {fileID: 2914274357781733614}
-  - component: {fileID: 6227964141164645452}
+  - component: {fileID: -5120456013739171156}
   m_Layer: 8
   m_Name: Goblin
   m_TagString: Enemy
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -19126829
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 1805404553, guid: 36f00d7b33487cd41b0201013d904276, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,7 +171,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6227964141164645452
+--- !u!114 &-5120456013739171156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,14 +180,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7190272501002167931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f334b96eff54d349044a0b00d294f23, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fff54d69b6b415194955ba122f95c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  damage: 20
+  damage: 10
+  bornLevel: 0
   moveSpeed: 200
-  maxHealth: 5
+  maxHealth: 10
   currentHealth: 0
   forward: {x: 0, y: 0}
+  burstParticles: {fileID: 4973583312902943917, guid: 83a3ff15b146f5647ae47f91c8a8ff5f, type: 3}
   attackInterval: 1
-  enemyPushForce: 10
+  enemyPushForce: 100
+  hurtSound: {fileID: 8300000, guid: 52dea2ceed1f03548b3772d092cde0b9, type: 3}

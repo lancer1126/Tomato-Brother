@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -19126829
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 160302685, guid: 6d8ef0876d921824ab83e7e7175885a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -185,10 +185,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   damage: 10
+  bornLevel: 0
   moveSpeed: 120
   maxHealth: 10
   currentHealth: 0
   forward: {x: 0, y: 0}
   attackInterval: 1
   enemyPushForce: 100
+  hurtSound: {fileID: 0}
   bornChildCount: 2

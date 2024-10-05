@@ -27375,6 +27375,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8231507053646852325, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
   m_PrefabInstance: {fileID: 3464025083131509835}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1232739294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1232739295}
+  - component: {fileID: 1232739296}
+  m_Layer: 0
+  m_Name: Group-Burst
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1232739295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232739294}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2079159960}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1232739296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232739294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a5a09c958b4787bb146a6c3f7838a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1661390164883750399, guid: 83a3ff15b146f5647ae47f91c8a8ff5f, type: 3}
 --- !u!1 &1241994532
 GameObject:
   m_ObjectHideFlags: 0
@@ -32116,6 +32161,7 @@ Transform:
   - {fileID: 1992449386}
   - {fileID: 1353227538}
   - {fileID: 1505075604}
+  - {fileID: 1232739295}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2079159961
@@ -32136,8 +32182,7 @@ MonoBehaviour:
   poolEnemyGroup: {fileID: 458965906}
   poolBulletGroup: {fileID: 1992449386}
   enemyTypes:
-  - {fileID: -3410300861696352887, guid: fdf3223bb21ce824bb1c38d19fd07504, type: 3}
-  - {fileID: 6227964141164645452, guid: 4a15eafcba24f984391240fc255fc201, type: 3}
+  - {fileID: 1305481859492211562, guid: 35ce313be92d44748a826cc516bd06db, type: 3}
   enemyBulletTypes:
   - {fileID: 1606172565302842958, guid: 20f0999731370d749b8cb9af60b7ef2c, type: 3}
 --- !u!1 &2088633308

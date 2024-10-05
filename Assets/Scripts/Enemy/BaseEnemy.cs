@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Effect;
 using Player;
 using Pool;
 using UnityEngine;
@@ -8,8 +9,8 @@ namespace Enemy
 {
     public class BaseEnemy : MonoBehaviour
     {
-        protected static readonly int IsRun = Animator.StringToHash("isRun");
-        protected static readonly int IsDead = Animator.StringToHash("isDead");
+        protected static readonly int AnimIsRun = Animator.StringToHash("isRun");
+        protected static readonly int AnimIsDead = Animator.StringToHash("isDead");
 
         public int level;
         public int damage = 10;
@@ -18,33 +19,40 @@ namespace Enemy
         public float maxHealth;
         public float currentHealth;
         public Vector2 forward;
+        public GameObject burstParticles;
 
         [SerializeField]
         protected float attackInterval = 1;
         [SerializeField]
-        public float enemyPushForce = 100;
+        protected float enemyPushForce = 100;
+        [SerializeField]
+        protected AudioClip hurtSound;
+        protected bool IsDead;
+        protected bool IsHurt;
+        protected float AttackTimer; // 攻击计时器
         protected Action ReleaseAction; // 将对象回收到对象池方法
         protected Func<BaseEnemy> GetAction; // 从对象池中获取对象方法
         protected Vector3 ToPlayerDir; // 敌人与玩家的向量
-        protected GameObject Player;
+        protected GameObject Player; // 玩家
         protected Animator Anim;
         protected Rigidbody2D Rb2;
-        protected bool IsHurt;
-        protected bool Dead;
-        protected float AttackTimer;
+        protected SpriteRenderer SpriteR;
+        protected Color OriginalColor;
 
         protected virtual void Awake()
         {
             Player = GameObject.FindWithTag("Player");
             Anim = GetComponent<Animator>();
             Rb2 = GetComponent<Rigidbody2D>();
+            SpriteR = GetComponent<SpriteRenderer>();
         }
 
         protected virtual void OnEnable()
         {
-            currentHealth = maxHealth;
-            Dead = false;
+            IsDead = false;
             IsHurt = false;
+            currentHealth = maxHealth;
+            OriginalColor = SpriteR.color;
         }
 
         protected virtual void FixedUpdate()
@@ -97,16 +105,29 @@ namespace Enemy
         }
 
         /// <summary>
-        /// 被子弹击中时扣除血量
+        /// 被子弹击中时的逻辑
         /// </summary>
-        /// <param name="hurtDamage"></param>
-        public virtual void TakeDamage(float hurtDamage)
+        /// <param name="attacker">攻击者，一般是玩家</param>
+        /// <param name="hurtDamage">伤害值</param>
+        /// <param name="repelPower">受击的后退力</param>
+        public virtual void TakeDamage(Transform attacker, float hurtDamage, float repelPower)
         {
-            if (Dead)
+            if (IsDead)
             {
                 return;
             }
 
+            IsHurt = true;
+            // 播放受伤音效
+            // AudioManager.Instance.Play(hurtSound, transform.position, 0.05f);
+            // 受攻击时触发敌人颜色变色
+            StartCoroutine(HitFlash());
+            // 爆炸粒子
+            TriggerBurst();
+            // 受攻击后退
+            TakeKnockBack(attacker, repelPower);
+            IsHurt = false;
+            
             if (currentHealth <= hurtDamage)
             {
                 currentHealth = 0;
@@ -117,25 +138,37 @@ namespace Enemy
                 currentHealth -= hurtDamage;
             }
         }
+        
+        /// <summary>
+        /// 被击中时触发爆炸粒子
+        /// </summary>
+        protected virtual void TriggerBurst()
+        {
+            var burst = BurstPool.Instance.GetFromPool();
+            burst.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+            burst.Play();
+        }
 
         /// <summary>
         /// 敌人被子弹击中时触发击退效果
         /// </summary>
-        public virtual void TakeRepel(Transform attacker, float repelPower)
+        protected virtual void TakeKnockBack(Transform attacker, float repelPower)
         {
-            if (currentHealth == 0)
-            {
-                return;
-            }
-
+            var originalSpeed = moveSpeed;
+            moveSpeed = 0;
             var dir = (transform.position - attacker.position).normalized;
-            StartCoroutine(ToRepel(dir * repelPower));
+            Rb2.AddForce(dir * repelPower, ForceMode2D.Impulse);
+            moveSpeed = originalSpeed;
         }
+        
 
+        /// <summary>
+        /// 朝玩家方向移动
+        /// </summary>
         protected virtual void MoveToPlayer()
         {
             ToPlayerDir = Player.transform.position - transform.position;
-            if (Dead || IsHurt)
+            if (IsDead || IsHurt)
             {
                 Rb2.velocity = Vector2.zero;
             }
@@ -147,11 +180,14 @@ namespace Enemy
             }
         }
 
+        /// <summary>
+        /// 移动
+        /// </summary>
         protected virtual void Move()
         {
             if (ToPlayerDir.magnitude > 0.5f)
             {
-                Anim.SetBool(IsRun, true);
+                Anim.SetBool(AnimIsRun, true);
                 ToPlayerDir.Normalize();
 
                 // 转向
@@ -169,11 +205,15 @@ namespace Enemy
             }
         }
 
+        /// <summary>
+        /// 死亡逻辑
+        /// </summary>
         protected virtual void Die()
         {
-            Dead = true;
-            Anim.SetBool(IsDead, true);
+            IsDead = true;
+            Anim.SetBool(AnimIsDead, true);
             CheckGetGold();
+            StartCoroutine(RecycleEnemy());
         }
 
         /// <summary>
@@ -186,6 +226,7 @@ namespace Enemy
             {
                 return;
             }
+
             var gold = GoldPool.Instance.GetFromPool();
             gold.SetGoldValue(goldVal);
             gold.transform.position = transform.position;
@@ -206,8 +247,13 @@ namespace Enemy
             playerController?.TakeDamage(damage);
         }
 
-        protected void RecycleEnemy()
+        /// <summary>
+        /// 使用协程在敌人死亡后回收实例
+        /// </summary>
+        protected IEnumerator RecycleEnemy()
         {
+            yield return new WaitForSeconds(0.5f);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             ReleaseAction?.Invoke();
         }
 
@@ -222,12 +268,30 @@ namespace Enemy
             return new Vector2(x, y);
         }
 
-        private IEnumerator ToRepel(Vector3 power)
+        /// <summary>
+        /// 设置被攻击后的无敌时间
+        /// </summary>
+        /// <param name="time">无敌时间</param>
+        /// <returns></returns>
+        private IEnumerator SetInvulnerable(float time = 0.1f)
         {
-            IsHurt = true;
-            Rb2.AddForce(power, ForceMode2D.Impulse);
             yield return new WaitForSeconds(0.1f);
             IsHurt = false;
+        }
+
+        /// <summary>
+        /// 受到攻击时变色，持续数帧
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator HitFlash(int frames = 5)
+        {
+            SpriteR.color = Color.red;
+            for (var i = 0; i < frames; i++)
+            {
+                yield return null;
+            }
+
+            SpriteR.color = OriginalColor;
         }
     }
 }

@@ -27,8 +27,7 @@ namespace Player.Weapon.Projectile
 
                 CurPenetration--;
                 var enemy = other.gameObject.GetComponent<BaseEnemy>();
-                enemy.TakeDamage(Damage);
-                enemy.TakeRepel(transform, RepelPower);
+                enemy.TakeDamage(transform, Damage, RepelPower);
 
                 if (CurPenetration <= 0)
                 {
