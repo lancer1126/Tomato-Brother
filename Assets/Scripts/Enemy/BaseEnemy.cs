@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using Player;
 using Pool;
 using UnityEngine;
@@ -17,12 +18,12 @@ namespace Enemy
         public float moveSpeed;
         public float maxHealth;
         public float currentHealth;
-        public Vector2 forward;
+        public Vector3 forward;
 
         [SerializeField]
         protected float attackInterval = 1;
         [SerializeField]
-        protected float enemyPushForce = 100;
+        private float knockbackDuration = 0.2f; // 被击退的持续时间
         [SerializeField]
         protected AudioClip hurtSound;
         protected bool IsDead;
@@ -123,9 +124,9 @@ namespace Enemy
             // 被击中后的特效
             HitEffect();
             // 受攻击后退
-            TakeKnockBack(attacker, repelPower);
+            TakeKnockBack(repelPower);
             IsHurt = false;
-            
+
             if (currentHealth <= hurtDamage)
             {
                 currentHealth = 0;
@@ -149,15 +150,17 @@ namespace Enemy
         /// <summary>
         /// 敌人被子弹击中时触发击退效果
         /// </summary>
-        protected virtual void TakeKnockBack(Transform attacker, float repelPower)
+        protected virtual void TakeKnockBack(float repelPower)
         {
-            var originalSpeed = moveSpeed;
-            moveSpeed = 0;
-            var dir = (transform.position - attacker.position).normalized;
-            Rb2.AddForce(dir * repelPower, ForceMode2D.Impulse);
-            moveSpeed = originalSpeed;
+            // 击退方向为当前正在前进的反方向
+            var knockbackDir = -forward;
+            // 计算敌人被击退到的位置
+            var knockbackTarget = transform.position + knockbackDir * repelPower;
+
+            transform.DOMove(knockbackTarget, knockbackDuration)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => { });
         }
-        
 
         /// <summary>
         /// 朝玩家方向移动
@@ -300,7 +303,7 @@ namespace Enemy
             hit.transform.position = transform.position;
             hit.transform.localScale = transform.localScale;
         }
-        
+
         /// <summary>
         /// 被击中时触发爆炸粒子
         /// </summary>

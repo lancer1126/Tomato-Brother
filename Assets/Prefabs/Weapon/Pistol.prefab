@@ -188,6 +188,6 @@ MonoBehaviour:
   attackAudio: {fileID: 8300000, guid: 1429de417691b1a488359276e294ad0d, type: 3}
   bulletMaxPenetration: 2
   bulletSpeed: 3000
-  bulletRepelPower: 500
+  bulletRepelPower: 3
   recoil: 0
   muzzle: {fileID: 5416005633714173583}
