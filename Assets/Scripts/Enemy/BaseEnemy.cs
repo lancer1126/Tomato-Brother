@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Effect;
 using Player;
 using Pool;
 using UnityEngine;
@@ -19,7 +18,6 @@ namespace Enemy
         public float maxHealth;
         public float currentHealth;
         public Vector2 forward;
-        public GameObject burstParticles;
 
         [SerializeField]
         protected float attackInterval = 1;
@@ -122,8 +120,8 @@ namespace Enemy
             // AudioManager.Instance.Play(hurtSound, transform.position, 0.05f);
             // 受攻击时触发敌人颜色变色
             StartCoroutine(HitFlash());
-            // 爆炸粒子
-            TriggerBurst();
+            // 被击中后的特效
+            HitEffect();
             // 受攻击后退
             TakeKnockBack(attacker, repelPower);
             IsHurt = false;
@@ -138,15 +136,14 @@ namespace Enemy
                 currentHealth -= hurtDamage;
             }
         }
-        
+
         /// <summary>
-        /// 被击中时触发爆炸粒子
+        /// 被击中后的特效
         /// </summary>
-        protected virtual void TriggerBurst()
+        protected virtual void HitEffect()
         {
-            var burst = BurstPool.Instance.GetFromPool();
-            burst.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
-            burst.Play();
+            TriggerHit();
+            TriggerBurst();
         }
 
         /// <summary>
@@ -292,6 +289,26 @@ namespace Enemy
             }
 
             SpriteR.color = OriginalColor;
+        }
+
+        /// <summary>
+        /// 触发击中动画 
+        /// </summary>
+        private void TriggerHit()
+        {
+            var hit = HitPool.Instance.GetFromPool();
+            hit.transform.position = transform.position;
+            hit.transform.localScale = transform.localScale;
+        }
+        
+        /// <summary>
+        /// 被击中时触发爆炸粒子
+        /// </summary>
+        private void TriggerBurst()
+        {
+            var burst = BurstPool.Instance.GetFromPool();
+            burst.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+            burst.Play();
         }
     }
 }
