@@ -1,23 +1,21 @@
 ﻿using System;
+using Player.Weapon.Projectile;
 using Pool;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Weapon.Ranged
 {
     public class RangedWeapon : BaseWeapon
     {
-        public int bulletMaxPenetration;
-        public float bulletSpeed;
-        public float bulletRepelPower;
+        public int bulletMaxPenetration; // 子弹最大穿透力
+        public float bulletSpeed; // 子弹速度
+        public Bullet bullet; //子弹组件
+
         [SerializeField]
         protected float recoil; // 后坐力
         [SerializeField]
         protected GameObject muzzle; // 发射子弹的枪口
-
-        protected override void Awake()
-        {
-            haveBullet = true;
-        }
 
         protected override void Init()
         {
@@ -51,7 +49,7 @@ namespace Player.Weapon.Ranged
         protected virtual void OpenFire()
         {
             AudioManager.Instance.Play(attackAudio, muzzle.transform.position, 0.1f);
-            
+
             var bulletIns = PoolController.Instance.BulletDict[weaponName].GetFromPool();
             bulletIns.transform.position = muzzle.transform.position;
             bulletIns.transform.rotation = muzzle.transform.rotation;

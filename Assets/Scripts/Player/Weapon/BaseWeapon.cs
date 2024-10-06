@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Player.Weapon.Projectile;
 using UnityEngine;
 using Util;
 
@@ -8,13 +7,12 @@ namespace Player.Weapon
 {
     public class BaseWeapon : MonoBehaviour
     {
-        public bool haveBullet; // 是否有子弹组件
         public int level; // 等级
         public int weaponIndex = -1; // 当前武器在背包中的索引
         public float damage; // 伤害
+        public float repelPower; // 攻击对敌人的击退力
         public string weaponName; // 武器名称
-        public Bullet bullet; //子弹组件
-        
+
         [SerializeField]
         protected int enemyDetectCount; // 一次检测敌人的数量
         [SerializeField]
@@ -32,10 +30,11 @@ namespace Player.Weapon
         protected float CurLsY; // 武器当前在y轴上的LocalScale属性，用于控制旋转
         protected Vector3 DefaultLocalScale; // 武器默认的大小和方向
         protected Vector3 DefaultRotate; // 武器默认的旋转角度
+        protected Vector3 OriginalLocalPos; // 初始的相对位置
         protected GameObject AttackTarget; // 攻击的目标
 
         protected virtual void Awake() { }
-
+        
         protected virtual void Start()
         {
             Init();
@@ -47,7 +46,9 @@ namespace Player.Weapon
             WeaponRotate();
             Attack();
         }
-
+        
+        protected virtual void OnTriggerEnter2D(Collider2D other) {}
+        
         /// <summary>
         /// 初始化属性
         /// </summary>
@@ -56,6 +57,7 @@ namespace Player.Weapon
             CurLsY = transform.localScale.y;
             DefaultLocalScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
             DefaultRotate = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 1);
+            OriginalLocalPos = transform.localPosition;
             EnemyLayer = LayerUtil.GetEnemy();
 
             if (detectInterval == 0)
@@ -117,11 +119,13 @@ namespace Player.Weapon
                 var enemyPos = AttackTarget.transform.position;
                 // 敌人对玩家的方向
                 var toDir = (enemyPos - transform.position).normalized;
-                // 控制武器是否翻转
+                // 旋转角度
+                var rotateAngle = Mathf.Atan2(toDir.y, toDir.x) * Mathf.Rad2Deg;
+                // 朝向左侧时控制武器是否翻转
                 var relativePosY = enemyPos.x < transform.position.x ? -CurLsY : CurLsY;
-
-                transform.right = toDir;
-                transform.localScale = new Vector3(CurLsY, relativePosY, 1);
+                
+                transform.rotation = Quaternion.Euler(0, 0, rotateAngle);
+                transform.localScale = new Vector3(transform.localScale.x, relativePosY, 1);
             }
             else
             {
@@ -135,6 +139,15 @@ namespace Player.Weapon
         /// 进行攻击
         /// </summary>
         protected virtual void Attack() { }
+
+        /// <summary>
+        /// 玩家是否朝向右边
+        /// </summary>
+        /// <returns></returns>
+        protected bool PlayerFacingRight()
+        {
+            return transform.parent.rotation.y >= 0;
+        }
 
         protected static class ColliderPool
         {

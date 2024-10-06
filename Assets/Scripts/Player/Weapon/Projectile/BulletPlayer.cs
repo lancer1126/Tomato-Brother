@@ -49,7 +49,7 @@ namespace Player.Weapon.Projectile
         {
             base.InitFromWeapon(weapon);
             MaxPenetration = weapon.bulletMaxPenetration;
-            RepelPower = weapon.bulletRepelPower;
+            RepelPower = weapon.repelPower;
             CurPenetration = MaxPenetration;
         }
 

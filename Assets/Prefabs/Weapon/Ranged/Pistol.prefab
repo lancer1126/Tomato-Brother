@@ -175,12 +175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb560b29209462fb6502cb33cdbc96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveBullet: 1
   level: 0
   weaponIndex: -1
   damage: 10
+  repelPower: 3
   weaponName: 
-  bullet: {fileID: -4138733957948849057, guid: 31b47d268e930c5479a27852c5121fe8, type: 3}
   enemyDetectCount: 10
   detectRange: 10
   attackInterval: 1
@@ -188,6 +187,6 @@ MonoBehaviour:
   attackAudio: {fileID: 8300000, guid: 1429de417691b1a488359276e294ad0d, type: 3}
   bulletMaxPenetration: 2
   bulletSpeed: 3000
-  bulletRepelPower: 3
-  recoil: 0
+  bullet: {fileID: -4138733957948849057, guid: 31b47d268e930c5479a27852c5121fe8, type: 3}
+  recoil: 10
   muzzle: {fileID: 5416005633714173583}

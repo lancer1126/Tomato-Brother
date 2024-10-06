@@ -27967,7 +27967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBornCount: 2
-  gameTime: 30
+  gameTime: 60
   enemyBornInterval: 2
   enemyBornTime: 0
   bornAnimation: {fileID: 4042426080689193013, guid: 015507cb9fbf4124b9babee50aa72636, type: 3}

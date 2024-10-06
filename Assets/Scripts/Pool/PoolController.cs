@@ -2,6 +2,7 @@
 using Enemy;
 using Player.Weapon;
 using Player.Weapon.Projectile;
+using Player.Weapon.Ranged;
 using ScriptObj;
 using UnityEngine;
 
@@ -79,11 +80,15 @@ namespace Pool
             BulletDict = new Dictionary<string, BulletPool>();
             foreach (var weapon in playerBag.weaponList)
             {
-                var baseWeapon = weapon.weaponPrefab.GetComponent<BaseWeapon>();
-                var haveBullet = baseWeapon.haveBullet;
-                if (!haveBullet)
+                var rangedWeapon = weapon.weaponPrefab.GetComponent<RangedWeapon>();
+                if (!rangedWeapon)
                 {
-                    return;
+                    continue;
+                }
+                var bullet = rangedWeapon.bullet;
+                if (!bullet)
+                {
+                    continue;
                 }
                 
                 var poolHolder = new GameObject($"Pool-{weapon.name}")
@@ -95,7 +100,7 @@ namespace Pool
                     }
                 };
                 var pool = poolHolder.AddComponent<BulletPool>();
-                pool.SetPrefab(baseWeapon.bullet);
+                pool.SetPrefab(bullet);
                 
                 BulletDict.Add(weapon.WeaponName, pool);
             }
