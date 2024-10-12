@@ -178,7 +178,7 @@ MonoBehaviour:
   level: 0
   weaponIndex: -1
   damage: 10
-  repelPower: 3
+  repelPower: 4
   weaponName: 
   enemyDetectCount: 10
   detectRange: 10

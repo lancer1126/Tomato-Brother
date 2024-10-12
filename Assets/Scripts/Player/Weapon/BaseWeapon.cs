@@ -43,7 +43,7 @@ namespace Player.Weapon
         protected virtual void FixedUpdate()
         {
             DetectEnemy();
-            WeaponRotate();
+            WeaponSighting();
             Attack();
         }
         
@@ -111,7 +111,7 @@ namespace Player.Weapon
         /// <summary>
         ///  将武器指向检测到的敌人
         /// </summary>
-        protected virtual void WeaponRotate()
+        protected virtual void WeaponSighting()
         {
             if (FindEnemy && AttackTarget)
             {
@@ -121,11 +121,17 @@ namespace Player.Weapon
                 var toDir = (enemyPos - transform.position).normalized;
                 // 旋转角度
                 var rotateAngle = Mathf.Atan2(toDir.y, toDir.x) * Mathf.Rad2Deg;
-                // 朝向左侧时控制武器是否翻转
-                var relativePosY = enemyPos.x < transform.position.x ? -CurLsY : CurLsY;
-                
+                // 武器朝向左侧时控制武器是否翻转
+                var lsY = enemyPos.x < transform.position.x ? -CurLsY : CurLsY;
+                // 是否需要翻转
+                var lsX = transform.localScale.x;
+                if ((PlayerFacingRight() && lsX < 0) || (!PlayerFacingRight() && lsX > 0))
+                {
+                    lsX = -lsX;
+                }
+
                 transform.rotation = Quaternion.Euler(0, 0, rotateAngle);
-                transform.localScale = new Vector3(transform.localScale.x, relativePosY, 1);
+                transform.localScale = new Vector3(lsX, lsY, 1);
             }
             else
             {
@@ -146,7 +152,7 @@ namespace Player.Weapon
         /// <returns></returns>
         protected bool PlayerFacingRight()
         {
-            return transform.parent.rotation.y >= 0;
+            return transform.parent.localScale.x >= 0;
         }
 
         protected static class ColliderPool

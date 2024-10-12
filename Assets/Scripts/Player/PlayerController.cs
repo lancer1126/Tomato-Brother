@@ -30,6 +30,8 @@ namespace Player
         private TMP_Text goldText;
         [SerializeField]
         private List<Vector2> weaponPosList;
+
+        private bool _isFacingRight = true;
         private bool _isDead;
         private float _speed;
         private Vector3 _moveDir;
@@ -40,14 +42,14 @@ namespace Player
         private void Awake()
         {
             Instance = this;
+            _rb2 = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
+            _impulseSource = GetComponent<CinemachineImpulseSource>();
         }
 
         private void Start()
         {
             _speed = playerStatus.speed;
-            _rb2 = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
-            _impulseSource = GetComponent<CinemachineImpulseSource>();
             LoadCharacter();
             LoadWeapon();
             InitStatusBar();
@@ -100,16 +102,17 @@ namespace Player
             _moveDir = new Vector3(h, v, 0).normalized;
             if (_moveDir != Vector3.zero)
             {
+                // 切换到移动动画
                 _animator.SetBool(IsMoving, true);
                 // 转向
-                transform.rotation = h switch
+                var curFacingRight = h > 0;
+                if (_isFacingRight != curFacingRight)
                 {
-                    > 0 => Quaternion.Euler(0, 0, 0),
-                    < 0 => Quaternion.Euler(0, 180, 0),
-                    _ => transform.rotation
-                };
+                    Flip();
+                }
 
-                _rb2.velocity = _moveDir * (_speed * Time.deltaTime);
+                // 移动
+                _rb2.velocity = _moveDir * _speed;
             }
             else
             {
@@ -138,13 +141,15 @@ namespace Player
             {
                 var weapon = Instantiate(playerBag.weaponList[i].weaponPrefab, transform);
                 weapon.transform.localPosition = weaponPosList[i];
-                
                 var baseWeapon = weapon.GetComponent<BaseWeapon>();
                 baseWeapon.weaponIndex = i;
                 baseWeapon.weaponName = playerBag.weaponList[i].WeaponName;
             }
         }
 
+        /// <summary>
+        /// 初始化状态条
+        /// </summary>
         private void InitStatusBar()
         {
             playerStatus.health = playerStatus.maxHealth;
@@ -153,12 +158,26 @@ namespace Player
             goldText.SetText(playerStatus.goldValue.ToString());
         }
 
+        /// <summary>
+        /// 玩家死亡
+        /// </summary>
         private void PlayerDie()
         {
             _isDead = true;
             _rb2.velocity = Vector2.zero;
             gameStatus.overMenuText = "GAME OVER";
             gameOverMenu.SetActive(true);
+        }
+
+        /// <summary>
+        /// 翻转方向
+        /// </summary>
+        private void Flip()
+        {
+            _isFacingRight = !_isFacingRight;
+            var originLs = transform.localScale;
+            originLs.x *= -1;
+            transform.localScale = originLs;
         }
     }
 }
