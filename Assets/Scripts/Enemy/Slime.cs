@@ -12,7 +12,6 @@ namespace Enemy
         protected override void Die()
         {
             ReleaseAction.Invoke();
-            Anim.SetBool(AnimIsDead, true);
             if (bornLevel < 1)
             {
                 BornChild();
@@ -20,7 +19,7 @@ namespace Enemy
             else
             {
                 IsDead = true;
-                CheckGetGold(2);
+                CheckLoot(2);
             }
         }
 

@@ -34,7 +34,7 @@ namespace Player.Weapon
         protected GameObject AttackTarget; // 攻击的目标
 
         protected virtual void Awake() { }
-        
+
         protected virtual void Start()
         {
             Init();
@@ -46,9 +46,9 @@ namespace Player.Weapon
             WeaponSighting();
             Attack();
         }
-        
-        protected virtual void OnTriggerEnter2D(Collider2D other) {}
-        
+
+        protected virtual void OnTriggerEnter2D(Collider2D other) { }
+
         /// <summary>
         /// 初始化属性
         /// </summary>
@@ -123,9 +123,11 @@ namespace Player.Weapon
                 var rotateAngle = Mathf.Atan2(toDir.y, toDir.x) * Mathf.Rad2Deg;
                 // 武器朝向左侧时控制武器是否翻转
                 var lsY = enemyPos.x < transform.position.x ? -CurLsY : CurLsY;
-                // 是否需要翻转
+                // 玩家是否面向右边
+                var playerToRight = PlayerFacingRight();
                 var lsX = transform.localScale.x;
-                if ((PlayerFacingRight() && lsX < 0) || (!PlayerFacingRight() && lsX > 0))
+                // 判断是否需要翻转
+                if ((playerToRight && lsX < 0) || (!playerToRight && lsX > 0))
                 {
                     lsX = -lsX;
                 }

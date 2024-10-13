@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6270190219147142146}
   - component: {fileID: 4300235087859248254}
   - component: {fileID: 2914274357781733614}
-  - component: {fileID: 5579164687376500016}
   m_Layer: 8
   m_Name: Bird
   m_TagString: Enemy
@@ -171,25 +170,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5579164687376500016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7190272501002167931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0d738d147c4d23bee5c4e2df5dfd17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 0
-  damage: 10
-  bornLevel: 0
-  moveSpeed: 150
-  maxHealth: 10
-  currentHealth: 0
-  forward: {x: 0, y: 0}
-  attackInterval: 2
-  enemyPushForce: 100
-  hurtSound: {fileID: 0}

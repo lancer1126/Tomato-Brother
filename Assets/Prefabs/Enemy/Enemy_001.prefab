@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8599064050257379767}
   - component: {fileID: 1684746981540558033}
   - component: {fileID: 6677205537484812500}
-  - component: {fileID: 437831221190034754}
   - component: {fileID: 1305481859492211562}
   m_Layer: 8
   m_Name: Enemy_001
@@ -149,28 +148,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!95 &437831221190034754
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2398294288762400201}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2722f4a7b4bceb741ad583503ee44b52, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Constraints: 0
 --- !u!114 &1305481859492211562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,11 +164,11 @@ MonoBehaviour:
   level: 0
   damage: 10
   bornLevel: 0
-  moveSpeed: 200
+  moveSpeed: 6
   maxHealth: 10
   currentHealth: 0
-  forward: {x: 0, y: 0}
-  burstParticles: {fileID: 4973583312902943917, guid: 83a3ff15b146f5647ae47f91c8a8ff5f, type: 3}
+  forward: {x: 0, y: 0, z: 0}
   attackInterval: 1
-  enemyPushForce: 100
+  knockbackDuration: 0.2
+  deadDuration: 0.3
   hurtSound: {fileID: 8300000, guid: 52dea2ceed1f03548b3772d092cde0b9, type: 3}

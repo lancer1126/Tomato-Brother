@@ -21,9 +21,11 @@ namespace Enemy
         public Vector3 forward;
 
         [SerializeField]
-        protected float attackInterval = 1;
+        protected float attackInterval = 1; // 攻击间隔
         [SerializeField]
         private float knockbackDuration = 0.2f; // 被击退的持续时间
+        [SerializeField]
+        private float deadDuration = 0.5f; // 死亡动画持续时间
         [SerializeField]
         protected AudioClip hurtSound;
         protected bool IsDead;
@@ -32,16 +34,17 @@ namespace Enemy
         protected Action ReleaseAction; // 将对象回收到对象池方法
         protected Func<BaseEnemy> GetAction; // 从对象池中获取对象方法
         protected Vector3 ToPlayerDir; // 敌人与玩家的向量
+        protected Vector3 OriginalLs; // 初始LocalScale
+        protected Vector3 RelativeLs; // 带翻转的LocalScale
         protected GameObject Player; // 玩家
-        protected Animator Anim;
         protected Rigidbody2D Rb2;
         protected SpriteRenderer SpriteR;
         protected Color OriginalColor;
+        protected Coroutine MoveAnimCr;
 
         protected virtual void Awake()
         {
             Player = GameObject.FindWithTag("Player");
-            Anim = GetComponent<Animator>();
             Rb2 = GetComponent<Rigidbody2D>();
             SpriteR = GetComponent<SpriteRenderer>();
         }
@@ -52,6 +55,9 @@ namespace Enemy
             IsHurt = false;
             currentHealth = maxHealth;
             OriginalColor = SpriteR.color;
+            OriginalLs = transform.localScale;
+            RelativeLs = transform.localScale;
+            StartAnimation();
         }
 
         protected virtual void FixedUpdate()
@@ -59,10 +65,12 @@ namespace Enemy
             MoveToPlayer();
         }
 
-        /// <summary>
-        /// 触碰到玩家时进行攻击
-        /// </summary>
-        /// <param name="other"></param>
+        protected virtual void Update()
+        {
+            CheckOrientation();
+            UpdateAnimation();
+        }
+
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
@@ -71,10 +79,6 @@ namespace Enemy
             }
         }
 
-        /// <summary>
-        /// 当持续触碰到玩家时，隔一段时间进行攻击
-        /// </summary>
-        /// <param name="other"></param>
         protected virtual void OnTriggerStay2D(Collider2D other)
         {
             if (!other.CompareTag("Player"))
@@ -92,17 +96,7 @@ namespace Enemy
                 AttackTimer += Time.deltaTime;
             }
         }
-
-        public void SetDeactivateAction(Action ra)
-        {
-            ReleaseAction = ra;
-        }
-
-        public void SetActiveAction(Func<BaseEnemy> getFunc)
-        {
-            GetAction = getFunc;
-        }
-
+        
         /// <summary>
         /// 被子弹击中时的逻辑
         /// </summary>
@@ -111,10 +105,7 @@ namespace Enemy
         /// <param name="repelPower">受击的后退力</param>
         public virtual void TakeDamage(Transform attacker, float hurtDamage, float repelPower)
         {
-            if (IsDead)
-            {
-                return;
-            }
+            if (IsDead) return;
 
             IsHurt = true;
             // 播放受伤音效
@@ -135,6 +126,66 @@ namespace Enemy
             else
             {
                 currentHealth -= hurtDamage;
+            }
+        }
+
+        /// <summary>
+        /// 回收对象
+        /// </summary>
+        /// <param name="ra"></param>
+        public void SetDeactivateAction(Action ra)
+        {
+            ReleaseAction = ra;
+        }
+
+        /// <summary>
+        /// 获取对象
+        /// </summary>
+        /// <param name="getFunc"></param>
+        public void SetActiveAction(Func<BaseEnemy> getFunc)
+        {
+            GetAction = getFunc;
+        }
+
+        /// <summary>
+        /// 开启控制游戏动画的协程
+        /// </summary>
+        protected virtual void StartAnimation()
+        {
+            if (MoveAnimCr != null)
+            {
+                StopCoroutine(MoveAnimCr);
+            }
+
+            MoveAnimCr = StartCoroutine(MoveAnimation());
+        }
+
+        /// <summary>
+        /// 判断游戏对象的朝向
+        /// </summary>
+        protected virtual void CheckOrientation()
+        {
+            var currentScale = transform.localScale;
+            currentScale.x = Mathf.Sign(forward.x) * Mathf.Abs(currentScale.x);
+            transform.localScale = currentScale;
+            OriginalLs.x = Mathf.Sign(forward.x) * Mathf.Abs(OriginalLs.x);
+        }
+
+        /// <summary>
+        /// 更新角色动画
+        /// </summary>
+        protected virtual void UpdateAnimation()
+        {
+            switch (IsDead)
+            {
+                case false when MoveAnimCr == null:
+                    StartAnimation();
+                    break;
+                case true when MoveAnimCr != null:
+                    StopCoroutine(MoveAnimCr);
+                    MoveAnimCr = null;
+                    transform.localScale = OriginalLs;
+                    break;
             }
         }
 
@@ -187,45 +238,39 @@ namespace Enemy
         {
             if (ToPlayerDir.magnitude > 0.5f)
             {
-                Anim.SetBool(AnimIsRun, true);
-                ToPlayerDir.Normalize();
-
-                // 转向
-                transform.rotation = ToPlayerDir.x switch
-                {
-                    > 0 => Quaternion.Euler(new Vector3(0, 0, 0)),
-                    < 0 => Quaternion.Euler(new Vector3(0, 180, 0)),
-                    _ => transform.rotation
-                };
-                Rb2.velocity = forward * (moveSpeed * Time.deltaTime);
+                Rb2.velocity = forward * moveSpeed;
             }
             else
             {
                 transform.position += Vector3.forward;
             }
         }
-
+        
         /// <summary>
         /// 死亡逻辑
         /// </summary>
         protected virtual void Die()
         {
             IsDead = true;
-            Anim.SetBool(AnimIsDead, true);
-            CheckGetGold();
-            StartCoroutine(RecycleEnemy());
+            var sequence = DOTween.Sequence();
+            sequence.Join(transform.DORotate(new Vector3(0, 0, 320), deadDuration, RotateMode.LocalAxisAdd)
+                .SetEase(Ease.Linear));
+            sequence.Join(transform.DOScale(0, deadDuration)
+                .SetEase(Ease.Linear));
+            sequence.Play();
+
+            // 生成战利品
+            CheckLoot();
+            sequence.OnComplete(() => { StartCoroutine(RecycleEnemy()); });
         }
 
         /// <summary>
         /// 计算是否生成金币
         /// </summary>
-        protected virtual void CheckGetGold(int goldVal = 3)
+        protected virtual void CheckLoot(int goldVal = 3)
         {
             var random = UnityEngine.Random.Range(1, 4);
-            if (random != 1)
-            {
-                return;
-            }
+            if (random != 1) return;
 
             var gold = GoldPool.Instance.GetFromPool();
             gold.SetGoldValue(goldVal);
@@ -238,13 +283,28 @@ namespace Enemy
         protected virtual void Attack(Collider2D other)
         {
             var otherObj = other.gameObject;
-            if (!otherObj.tag.Equals("Player"))
-            {
-                return;
-            }
+            if (!otherObj.tag.Equals("Player")) return;
 
             var playerController = other.gameObject.GetComponent<PlayerController>();
             playerController?.TakeDamage(damage);
+        }
+        
+        /// <summary>
+        /// 移动动画
+        /// </summary>
+        protected virtual IEnumerator MoveAnimation()
+        {
+            while (!IsDead)
+            {
+                yield return transform
+                    .DOScale(new Vector3(OriginalLs.x * 1.2f, OriginalLs.y * 0.8f, OriginalLs.z), 0.3f)
+                    .SetEase(Ease.InOutQuad)
+                    .WaitForCompletion();
+            
+                yield return transform.DOScale(OriginalLs, 0.7f)
+                    .SetEase(Ease.InOutQuad)
+                    .WaitForCompletion();
+            }
         }
 
         /// <summary>
@@ -254,6 +314,7 @@ namespace Enemy
         {
             yield return new WaitForSeconds(0.5f);
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.localScale = OriginalLs;
             ReleaseAction?.Invoke();
         }
 
@@ -266,17 +327,6 @@ namespace Enemy
             var x = UnityEngine.Random.Range(-1, 2);
             var y = UnityEngine.Random.Range(-1, 2);
             return new Vector2(x, y);
-        }
-
-        /// <summary>
-        /// 设置被攻击后的无敌时间
-        /// </summary>
-        /// <param name="time">无敌时间</param>
-        /// <returns></returns>
-        private IEnumerator SetInvulnerable(float time = 0.1f)
-        {
-            yield return new WaitForSeconds(0.1f);
-            IsHurt = false;
         }
 
         /// <summary>
