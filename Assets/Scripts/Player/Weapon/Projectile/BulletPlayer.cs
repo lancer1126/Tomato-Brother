@@ -11,8 +11,9 @@ namespace Player.Weapon.Projectile
         protected float RepelPower; // 子弹把敌人击退的力
         protected Animator Anim;
 
-        private void OnEnable()
+        protected override void Awake()
         {
+            base.Awake();
             Anim = GetComponent<Animator>();
         }
 

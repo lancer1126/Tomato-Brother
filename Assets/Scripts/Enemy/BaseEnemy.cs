@@ -35,7 +35,6 @@ namespace Enemy
         protected Func<BaseEnemy> GetAction; // 从对象池中获取对象方法
         protected Vector3 ToPlayerDir; // 敌人与玩家的向量
         protected Vector3 OriginalLs; // 初始LocalScale
-        protected Vector3 RelativeLs; // 带翻转的LocalScale
         protected GameObject Player; // 玩家
         protected Rigidbody2D Rb2;
         protected SpriteRenderer SpriteR;
@@ -47,16 +46,17 @@ namespace Enemy
             Player = GameObject.FindWithTag("Player");
             Rb2 = GetComponent<Rigidbody2D>();
             SpriteR = GetComponent<SpriteRenderer>();
+            OriginalLs = transform.localScale;
         }
 
         protected virtual void OnEnable()
         {
             IsDead = false;
             IsHurt = false;
+            transform.localScale = OriginalLs;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             currentHealth = maxHealth;
             OriginalColor = SpriteR.color;
-            OriginalLs = transform.localScale;
-            RelativeLs = transform.localScale;
             StartAnimation();
         }
 
@@ -115,7 +115,7 @@ namespace Enemy
             // 被击中后的特效
             HitEffect();
             // 受攻击后退
-            TakeKnockBack(repelPower);
+            TakeKnockBack(attacker, repelPower);
             IsHurt = false;
 
             if (currentHealth <= hurtDamage)
@@ -184,7 +184,6 @@ namespace Enemy
                 case true when MoveAnimCr != null:
                     StopCoroutine(MoveAnimCr);
                     MoveAnimCr = null;
-                    transform.localScale = OriginalLs;
                     break;
             }
         }
@@ -201,10 +200,11 @@ namespace Enemy
         /// <summary>
         /// 敌人被子弹击中时触发击退效果
         /// </summary>
-        protected virtual void TakeKnockBack(float repelPower)
+        protected virtual void TakeKnockBack(Transform attacker, float repelPower)
         {
             // 击退方向为当前正在前进的反方向
-            var knockbackDir = -forward;
+            // var knockbackDir = -forward;
+            var knockbackDir = attacker.right.normalized;
             // 计算敌人被击退到的位置
             var knockbackTarget = transform.position + knockbackDir * repelPower;
 
@@ -253,7 +253,7 @@ namespace Enemy
         {
             IsDead = true;
             var sequence = DOTween.Sequence();
-            sequence.Join(transform.DORotate(new Vector3(0, 0, 320), deadDuration, RotateMode.LocalAxisAdd)
+            sequence.Join(transform.DORotate(new Vector3(0, 0, 350), deadDuration, RotateMode.LocalAxisAdd)
                 .SetEase(Ease.Linear));
             sequence.Join(transform.DOScale(0, deadDuration)
                 .SetEase(Ease.Linear));
@@ -312,9 +312,7 @@ namespace Enemy
         /// </summary>
         protected IEnumerator RecycleEnemy()
         {
-            yield return new WaitForSeconds(0.5f);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            transform.localScale = OriginalLs;
+            yield return null;
             ReleaseAction?.Invoke();
         }
 

@@ -6,16 +6,24 @@ namespace Player.Weapon.Projectile
 {
     public class Bullet : MonoBehaviour
     {
-        protected float Speed;
         protected bool IsBulletEnd;
+        protected float Speed;
         protected float Damage;
+        protected float AliveDuration; // 子弹存活时间
         protected Vector2 Forward;
         protected Action ReleaseAction;
         protected Rigidbody2D Rb2;
+        
+        private float _aliveTimer; // 子弹存活计时器
 
         protected virtual void Awake()
         {
             Rb2 = GetComponent<Rigidbody2D>();
+        }
+
+        protected virtual void OnEnable()
+        {
+            _aliveTimer = 0;
         }
 
         protected virtual void Start()
@@ -25,13 +33,21 @@ namespace Player.Weapon.Projectile
 
         protected virtual void FixedUpdate()
         {
+            _aliveTimer += Time.deltaTime;
+            if (_aliveTimer >= AliveDuration)
+            {
+                IsBulletEnd = true;
+                _aliveTimer = 0;
+            }
+            
             if (IsBulletEnd)
             {
                 Rb2.velocity = Vector2.zero;
+                ToRecycle();
             }
             else
             {
-                Rb2.velocity = Forward * (Speed * Time.deltaTime);
+                Rb2.velocity = Forward * Speed;
             }
         }
 
@@ -39,11 +55,17 @@ namespace Player.Weapon.Projectile
         {
             Speed = weapon.bulletSpeed;
             Damage = weapon.damage;
+            AliveDuration = weapon.bulletAliveTime;
         }
 
         public void SetDeactivateAction(Action ra)
         {
             ReleaseAction = ra;
+        }
+
+        protected virtual void ToRecycle()
+        {
+            ReleaseAction?.Invoke();
         }
     }
 }

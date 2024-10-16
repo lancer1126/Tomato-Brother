@@ -2,7 +2,6 @@
 using Player.Weapon.Projectile;
 using Pool;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player.Weapon.Ranged
 {
@@ -10,6 +9,7 @@ namespace Player.Weapon.Ranged
     {
         public int bulletMaxPenetration; // 子弹最大穿透力
         public float bulletSpeed; // 子弹速度
+        public float bulletAliveTime; // 子弹存活时间
         public Bullet bullet; //子弹组件
 
         [SerializeField]
@@ -23,6 +23,11 @@ namespace Player.Weapon.Ranged
             if (muzzle == null)
             {
                 muzzle = transform.Find("Muzzle").gameObject;
+            }
+
+            if (bulletAliveTime == 0)
+            {
+                bulletAliveTime = 1;
             }
         }
 
