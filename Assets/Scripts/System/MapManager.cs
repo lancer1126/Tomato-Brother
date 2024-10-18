@@ -29,7 +29,7 @@ namespace System
         [SerializeField]
         private GameStatus gameStatus;
 
-        private const int MapScaleX = 32;
+        private const int MapScaleX = 24;
         private const int MapScaleY = 16;
         private bool _isPauseOpen;
         private int _enemyType;
