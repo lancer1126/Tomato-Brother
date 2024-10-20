@@ -78,6 +78,11 @@ namespace System
             StartCoroutine(ReleaseAudioSource(source, clip.length));
         }
 
+        public void Play(AudioClip clip, float clipVolume)
+        {
+            Play(clip, defaultPos, clipVolume);
+        }
+
         /// <summary>
         /// 初始化音频池，根据poolSize新建一定数量的AudioSource
         /// </summary>

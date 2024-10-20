@@ -1,4 +1,5 @@
 ﻿using System;
+using Enemy.Ranged;
 using Player.Weapon.Ranged;
 using UnityEngine;
 
@@ -56,6 +57,13 @@ namespace Player.Weapon.Projectile
             Speed = weapon.bulletSpeed;
             Damage = weapon.damage;
             AliveDuration = weapon.bulletAliveTime;
+        }
+
+        public virtual void InitFromEnemy(RangedEnemy enemy)
+        {
+            Speed = enemy.bulletSpeed;
+            Damage = enemy.damage;
+            AliveDuration = enemy.bulletAliveTime;
         }
 
         public void SetDeactivateAction(Action ra)

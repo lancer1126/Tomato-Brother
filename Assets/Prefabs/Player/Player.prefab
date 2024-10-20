@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 2115207473522550528}
   - component: {fileID: 3087523511054800553}
   - component: {fileID: -5653585563430592192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   gameStatus: {fileID: 11400000, guid: 2c50e745abaca174a9ced978b2cfc9ee, type: 2}
   goldText: {fileID: 0}
   weaponPosList:
-  - {x: 0.68, y: 0}
+  - {x: 1, y: 0}
   - {x: 1, y: -0.26}
 --- !u!50 &2115207473522550528
 Rigidbody2D:
@@ -191,8 +191,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0037639514, y: 0.0027374104}
-  m_Size: {x: 0.095936045, y: 0.17452519}
+  m_Offset: {x: 0.028106332, y: 0.04330811}
+  m_Size: {x: 0.5881946, y: 0.9966069}
   m_Direction: 0
 --- !u!114 &-5653585563430592192
 MonoBehaviour:

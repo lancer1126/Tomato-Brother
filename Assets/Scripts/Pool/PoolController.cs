@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Enemy;
-using Player.Weapon;
 using Player.Weapon.Projectile;
 using Player.Weapon.Ranged;
 using ScriptObj;
@@ -13,8 +12,8 @@ namespace Pool
         public static PoolController Instance { get; private set; }
 
         public List<EnemyPool> enemyPools;
-        public List<BulletPool> enemyBulletPools;
         public Dictionary<string, BulletPool> BulletDict;
+        public Dictionary<string, BulletPool> EnemyBulletDict;
 
         [SerializeField]
         private Bag playerBag;
@@ -85,12 +84,13 @@ namespace Pool
                 {
                     continue;
                 }
+
                 var bullet = rangedWeapon.bullet;
                 if (!bullet)
                 {
                     continue;
                 }
-                
+
                 var poolHolder = new GameObject($"Pool-{weapon.name}")
                 {
                     transform =
@@ -101,14 +101,14 @@ namespace Pool
                 };
                 var pool = poolHolder.AddComponent<BulletPool>();
                 pool.SetPrefab(bullet);
-                
+
                 BulletDict.Add(weapon.WeaponName, pool);
             }
         }
 
         private void InitEnemyBulletPool()
         {
-            enemyBulletPools = new List<BulletPool>();
+            EnemyBulletDict = new Dictionary<string, BulletPool>();
             foreach (var bullet in enemyBulletTypes)
             {
                 var poolHolder = new GameObject($"Pool-{bullet.name}")
@@ -121,8 +121,8 @@ namespace Pool
                 };
                 var pool = poolHolder.AddComponent<BulletPool>();
                 pool.SetPrefab(bullet);
-                
-                enemyBulletPools.Add(pool);
+
+                EnemyBulletDict.Add(bullet.name, pool);
             }
         }
     }

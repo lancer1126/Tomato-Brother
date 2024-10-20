@@ -42,14 +42,6 @@ namespace Enemy
             }
         }
 
-        private void RemoteAttack()
-        {
-            // 从池中取出子弹实例
-            var bullet = PoolController.Instance.enemyBulletPools[0].GetFromPool();
-            // 将子弹的位置初始化为敌人的位置
-            bullet.transform.position = transform.position;
-            // 子弹的朝向设为对玩家的方向
-            bullet.transform.right = ToPlayerDir;
-        }
+        private void RemoteAttack() { }
     }
 }

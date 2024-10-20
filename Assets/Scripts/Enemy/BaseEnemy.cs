@@ -25,7 +25,7 @@ namespace Enemy
         [SerializeField]
         private float knockbackDuration = 0.2f; // 被击退的持续时间
         [SerializeField]
-        private float deadDuration = 0.5f; // 死亡动画持续时间
+        private float deadDuration = 0.3f; // 死亡动画持续时间
         [SerializeField]
         protected AudioClip hurtSound;
         protected bool IsDead;
