@@ -91,7 +91,7 @@ namespace UI
                 {
                     _weaponIndex = index;
                     // 在武器列表中点击后将玩家的武器替换为选中的
-                    weaponSprite.sprite = item.weaponImg;
+                    weaponSprite.sprite = item.img;
                     AudioManager.Instance.Play(confirmAudio, _cameraDefaultPos);
                 }, TrickleDown.TrickleDown);
 
@@ -122,7 +122,7 @@ namespace UI
         private void CustomWeaponStyle(TemplateContainer itemUI, Weapon item)
         {
             // UI中WeaponItem元素的背景图片设置为预设的
-            itemUI.Q("img").style.backgroundImage = new StyleBackground(item.weaponImg);
+            itemUI.Q("img").style.backgroundImage = new StyleBackground(item.img);
             // 获取存放图片的元素并设置缩放
             var itemElement = itemUI.Q("item");
             itemElement.style.paddingLeft = 40;

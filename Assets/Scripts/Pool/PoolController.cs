@@ -79,7 +79,7 @@ namespace Pool
             BulletDict = new Dictionary<string, BulletPool>();
             foreach (var weapon in playerBag.weaponList)
             {
-                var rangedWeapon = weapon.weaponPrefab.GetComponent<RangedWeapon>();
+                var rangedWeapon = weapon.prefab.GetComponent<RangedWeapon>();
                 if (!rangedWeapon)
                 {
                     continue;
@@ -102,7 +102,7 @@ namespace Pool
                 var pool = poolHolder.AddComponent<BulletPool>();
                 pool.SetPrefab(bullet);
 
-                BulletDict.Add(weapon.WeaponName, pool);
+                BulletDict.Add(weapon.itemName, pool);
             }
         }
 

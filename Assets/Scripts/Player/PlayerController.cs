@@ -139,11 +139,11 @@ namespace Player
         {
             for (var i = 0; i < playerBag.weaponList.Count; i++)
             {
-                var weapon = Instantiate(playerBag.weaponList[i].weaponPrefab, transform);
+                var weapon = Instantiate(playerBag.weaponList[i].prefab, transform);
                 weapon.transform.localPosition = weaponPosList[i];
                 var baseWeapon = weapon.GetComponent<BaseWeapon>();
                 baseWeapon.weaponIndex = i;
-                baseWeapon.weaponName = playerBag.weaponList[i].WeaponName;
+                baseWeapon.weaponName = playerBag.weaponList[i].itemName;
             }
         }
 

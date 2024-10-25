@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60b6566e1c74942973674f81fa218b3, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  WeaponName: Knife
-  weaponImg: {fileID: 21300000, guid: 3591b14d12cb7694c9099c04d175f1bd, type: 3}
-  weaponPrefab: {fileID: 3227512101483521616, guid: d355092058170354b98bfb33b52db6c1, type: 3}
+  img: {fileID: 21300000, guid: 3591b14d12cb7694c9099c04d175f1bd, type: 3}
+  itemName: Knife
+  description: "\u65E0\u654C\u5C0F\u5315\u9996"
+  itemType: 0
+  prefab: {fileID: 3227512101483521616, guid: d355092058170354b98bfb33b52db6c1, type: 3}
