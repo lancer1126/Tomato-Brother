@@ -27998,7 +27998,7 @@ GameObject:
   - component: {fileID: 825349814}
   m_Layer: 5
   m_Name: RoundShop
-  m_TagString: Untagged
+  m_TagString: RoundShop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28041,6 +28041,7 @@ MonoBehaviour:
   shopProduct: {fileID: 11400000, guid: e18d9815983400b468964064c0c3d3d4, type: 2}
   upgradeObj: {fileID: 434210660}
   upgradeItem: {fileID: 4124983347958784142, guid: 04f318103b4711d409a9c53cd99dd8fb, type: 3}
+  playerBag: {fileID: 11400000, guid: 6a04348c74126884787e52ada275b293, type: 2}
 --- !u!1 &866987039
 GameObject:
   m_ObjectHideFlags: 0

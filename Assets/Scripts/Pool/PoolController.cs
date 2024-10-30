@@ -91,7 +91,7 @@ namespace Pool
                     continue;
                 }
 
-                var poolHolder = new GameObject($"Pool-{weapon.name}")
+                var poolHolder = new GameObject($"Pool-{weapon.itemName}")
                 {
                     transform =
                     {
@@ -102,6 +102,7 @@ namespace Pool
                 var pool = poolHolder.AddComponent<BulletPool>();
                 pool.SetPrefab(bullet);
 
+                Debug.Log("添加" + weapon.itemName);
                 BulletDict.Add(weapon.itemName, pool);
             }
         }
