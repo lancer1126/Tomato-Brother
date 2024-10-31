@@ -102,7 +102,6 @@ namespace Pool
                 var pool = poolHolder.AddComponent<BulletPool>();
                 pool.SetPrefab(bullet);
 
-                Debug.Log("添加" + weapon.itemName);
                 BulletDict.Add(weapon.itemName, pool);
             }
         }

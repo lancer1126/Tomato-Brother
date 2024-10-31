@@ -131,7 +131,7 @@ MonoBehaviour:
   goldText: {fileID: 0}
   weaponPosList:
   - {x: 1, y: 0}
-  - {x: 1, y: -0.26}
+  - {x: -1, y: 0}
 --- !u!50 &2115207473522550528
 Rigidbody2D:
   serializedVersion: 4
