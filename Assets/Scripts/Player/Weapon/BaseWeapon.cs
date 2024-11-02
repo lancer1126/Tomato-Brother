@@ -69,6 +69,11 @@ namespace Player.Weapon
             {
                 AttackTimer = 1;
             }
+
+            if (detectInterval == 0)
+            {
+                detectInterval = attackInterval;
+            }
         }
 
         /// <summary>
@@ -105,7 +110,7 @@ namespace Player.Weapon
 
             ColliderPool.Release(colliders);
             FindEnemy = AttackTarget;
-            DetectTimer -= detectInterval;
+            DetectTimer = 0;
         }
 
         /// <summary>

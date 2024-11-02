@@ -2,6 +2,7 @@
 using Player.Weapon.Projectile;
 using Pool;
 using UnityEngine;
+using Util;
 
 namespace Player.Weapon.Ranged
 {
@@ -52,7 +53,7 @@ namespace Player.Weapon.Ranged
             }
 
             OpenFire();
-            AttackTimer -= attackInterval;
+            AttackTimer = 0;
         }
 
         /// <summary>

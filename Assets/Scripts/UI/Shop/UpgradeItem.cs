@@ -16,6 +16,8 @@ namespace UI.Shop
         private TMP_Text description;
         [SerializeField]
         private Button button;
+        [SerializeField]
+        private AudioClip selectClip;
 
         private RoundShop _roundShop;
         private Item _item;
@@ -35,8 +37,10 @@ namespace UI.Shop
 
         public void ChooseItem()
         {
+            AudioManager.Instance.Play(selectClip);
             _roundShop.AddItemToBag(_item);
             gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(false);
         }
     }
 }

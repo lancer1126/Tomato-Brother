@@ -13,8 +13,6 @@ namespace System
         [SerializeField]
         private int enemyBornCount = 10; // 批次生成敌人数量
         [SerializeField]
-        private float gameTime = 30; // 一局游戏时间
-        [SerializeField]
         private float enemyBornInterval = 3; // 敌人生成间隔
         [SerializeField]
         private float enemyBornTime; // 标记生成敌人
@@ -42,6 +40,7 @@ namespace System
         private bool _isPauseOpen;
         private bool _shopOpened;
         private int _enemyType;
+        private float _gameTime; // 一局游戏时间
         private float _clockTimer;
         private AudioSource _bgm;
         private List<EnemyPool> _enemyPools; // 敌人对象池
@@ -50,11 +49,6 @@ namespace System
         {
             enemyBornTime = enemyBornInterval;
             _bgm = GetComponent<AudioSource>();
-            if (gameStatus.wave == 0)
-            {
-                gameStatus.wave = 1;
-            }
-
             Time.timeScale = 1;
         }
 
@@ -74,8 +68,8 @@ namespace System
                 CheckKeyEsc();
             }
 
-            gameTime -= Time.deltaTime;
-            if (gameTime <= 0)
+            _gameTime -= Time.deltaTime;
+            if (_gameTime <= 0)
             {
                 if (!_shopOpened)
                 {
@@ -103,9 +97,13 @@ namespace System
         /// </summary>
         private void InitWave()
         {
-            if (gameTime == 0)
+            if (gameStatus.wave == 0)
             {
-                gameTime = 30;
+                gameStatus.wave = 1;
+            }
+            if (_gameTime == 0)
+            {
+                _gameTime = gameStatus.roundTime;
             }
 
             enemyBornCount *= gameStatus.wave;
@@ -170,9 +168,9 @@ namespace System
         /// </summary>
         private void RoundUpdate()
         {
-            gameTimeText.text = ((int)gameTime + 1).ToString();
-            gameTimeText.color = gameTime <= 10 ? Color.red : Color.white;
-            if (gameTime <= clockStartTime + 1)
+            gameTimeText.text = ((int)_gameTime + 1).ToString();
+            gameTimeText.color = _gameTime <= 10 ? Color.red : Color.white;
+            if (_gameTime <= clockStartTime + 1)
             {
                 if (_clockTimer >= 1f)
                 {

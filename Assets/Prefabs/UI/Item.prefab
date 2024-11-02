@@ -438,6 +438,7 @@ MonoBehaviour:
   itemName: {fileID: 7023032796832788974}
   description: {fileID: 6022263481175617394}
   button: {fileID: 4645975131387276575}
+  selectClip: {fileID: 8300000, guid: e166ad01fa4894540bace9b1be5342da, type: 3}
 --- !u!1 &4639683466856612402
 GameObject:
   m_ObjectHideFlags: 0

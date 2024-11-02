@@ -323,8 +323,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -231}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 4.2681, y: -231}
+  m_SizeDelta: {x: 374.3885, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &198590867
 MonoBehaviour:
@@ -373,8 +373,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -28042,6 +28042,8 @@ MonoBehaviour:
   upgradeObj: {fileID: 434210660}
   upgradeItem: {fileID: 4124983347958784142, guid: 04f318103b4711d409a9c53cd99dd8fb, type: 3}
   playerBag: {fileID: 11400000, guid: 6a04348c74126884787e52ada275b293, type: 2}
+  title: {fileID: 2112573881}
+  playerStatus: {fileID: 11400000, guid: 9e0e52c0fc004dc459b04a566cd73678, type: 2}
 --- !u!1 &866987039
 GameObject:
   m_ObjectHideFlags: 0
@@ -29073,7 +29075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBornCount: 2
-  gameTime: 45
+  gameTime: 10
   enemyBornInterval: 2
   enemyBornTime: 0
   clockStartTime: 5
@@ -29775,7 +29777,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 72, y: 592}
+  m_AnchoredPosition: {x: 85, y: 592}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1859896229
@@ -30275,8 +30277,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: 338}
-  m_SizeDelta: {x: 446.9843, y: 262.9174}
+  m_AnchoredPosition: {x: 18.3657, y: 338}
+  m_SizeDelta: {x: 628.6876, y: 262.9174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2112573881
 MonoBehaviour:
@@ -30428,6 +30430,34 @@ PrefabInstance:
       propertyPath: gameOverMenu
       value: 
       objectReference: {fileID: 981044582}
+    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: weaponPosList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: weaponPosList.Array.data[0].y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: weaponPosList.Array.data[1].y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: weaponPosList.Array.data[2].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: weaponPosList.Array.data[2].y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: weaponPosList.Array.data[3].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
+      propertyPath: weaponPosList.Array.data[3].y
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8231507053646852325, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.86

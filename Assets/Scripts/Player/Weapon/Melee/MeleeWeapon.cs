@@ -53,7 +53,7 @@ namespace Player.Weapon.Melee
             }
 
             MeleeAttack();
-            AttackTimer -= attackInterval;
+            AttackTimer = 0;
         }
 
         /// <summary>

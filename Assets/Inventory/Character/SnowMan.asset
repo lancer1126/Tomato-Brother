@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60a4ab3ef45446bacdc02aa3b00bf8f, type: 3}
+  m_Name: SnowMan
+  m_EditorClassIdentifier: 
+  characterName: SnowMan
+  characterImg: {fileID: 1818886974, guid: 0d22e02fd92a8ef428548c60be3cfea1, type: 3}
+  characterAnimator: {fileID: 9100000, guid: 047501e967be6254c93d5cc7d83ffbf4, type: 2}

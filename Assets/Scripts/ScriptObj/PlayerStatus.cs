@@ -31,7 +31,7 @@ namespace ScriptObj
         public float pickUpRange; //拾取范围%
         public int goldValue; //金币
         public bool isAttackWithPoison; //攻击是否带毒
-        public int weaponSlot; //武器槽位
+        public int weaponSlot = 6; //武器槽位
 
         public void Init()
         {

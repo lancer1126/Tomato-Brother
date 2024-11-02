@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ScriptObj;
+using TMPro;
 using UnityEngine;
 
 namespace UI.Shop
@@ -15,6 +16,10 @@ namespace UI.Shop
         private GameObject upgradeItem;
         [SerializeField]
         private Bag playerBag;
+        [SerializeField]
+        private TMP_Text title;
+        [SerializeField]
+        private PlayerStatus playerStatus;
 
         private void OnEnable()
         {
@@ -36,6 +41,12 @@ namespace UI.Shop
 
         private void InitItem()
         {
+            if (playerBag.weaponList.Count >= playerStatus.weaponSlot)
+            {
+                title.text = "武器已满!";
+                return;
+            }
+            
             var existWeapons = playerBag.weaponList.Select(w => w.itemName).ToList();
             foreach (var weapon in shopProduct.weaponList)
             {
