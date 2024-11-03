@@ -9,13 +9,6 @@ namespace Player.Weapon.Projectile
         protected int MaxPenetration; // 子弹最大贯通数
         protected int CurPenetration; // 当前剩余的贯通数
         protected float RepelPower; // 子弹把敌人击退的力
-        protected Animator Anim;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            Anim = GetComponent<Animator>();
-        }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {

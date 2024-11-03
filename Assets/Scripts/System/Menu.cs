@@ -22,7 +22,7 @@ namespace System
             gameStatus.Init();
             playerStatus.Init();
             Time.timeScale = 1;
-            SceneManager.LoadScene("Select");
+            SceneLoader.Instance.Load("Select");
         }
 
         public void OpenSetting()

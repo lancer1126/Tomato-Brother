@@ -21,9 +21,9 @@ namespace Effect
 
         private IEnumerator HideText()
         {
-            transform.DOBlendableMoveBy(new Vector2(0, 1f), 0.25f);
+            transform.DOBlendableMoveBy(new Vector2(0, 2f), 0.1f);
             yield return new WaitForSeconds(0.25f);
-            transform.DOBlendableMoveBy(new Vector2(0, -0.5f), 0.25f);
+            transform.DOBlendableMoveBy(new Vector2(0, -0.5f), 0.1f);
             yield return new WaitForSeconds(0.25f);
             
             _releaseAction.Invoke();

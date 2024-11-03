@@ -89,7 +89,7 @@ namespace System
         {
             gameStatus.wave += 1;
             shopObj.SetActive(false);
-            SceneManager.LoadScene("Fight");
+            SceneLoader.Instance.Load("Fight");
         }
 
         /// <summary>

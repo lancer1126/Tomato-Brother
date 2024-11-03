@@ -29075,7 +29075,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBornCount: 2
-  gameTime: 10
   enemyBornInterval: 2
   enemyBornTime: 0
   clockStartTime: 5

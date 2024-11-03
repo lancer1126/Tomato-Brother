@@ -61,35 +61,6 @@ namespace Player.Weapon.Ranged
         /// </summary>
         protected virtual void OpenFire()
         {
-            switch (bulletsPerShot)
-            {
-                case <= 1:
-                    SingleShot();
-                    break;
-                default:
-                    MultiShot();
-                    break;
-            }
-        }
-
-        /**
-         * 单发子弹射击
-         */
-        protected virtual void SingleShot()
-        {
-            AudioManager.Instance.Play(attackAudio, muzzle.transform.position, 0.1f);
-
-            var bulletIns = PoolController.Instance.BulletDict[weaponName].GetFromPool();
-            bulletIns.transform.position = muzzle.transform.position;
-            bulletIns.transform.rotation = muzzle.transform.rotation;
-            bulletIns.InitFromWeapon(this);
-        }
-
-        /// <summary>
-        /// 多发子弹射击
-        /// </summary>
-        protected virtual void MultiShot()
-        {
             AudioManager.Instance.Play(attackAudio, 0.1f);
             for (var i = 1; i <= bulletsPerShot; i++)
             {
@@ -97,14 +68,13 @@ namespace Player.Weapon.Ranged
                 bulletIns.transform.position = muzzle.transform.position;
                 bulletIns.transform.rotation = muzzle.transform.rotation;
                 bulletIns.InitFromWeapon(this);
-                if (i > 1)
-                {
-                    var offset = i % 2 == 0 ? UnityEngine.Random.Range(-12, 0) : UnityEngine.Random.Range(0, 12);
+                if (i <= 1) continue;
 
-                    var eulerAngles = bulletIns.transform.eulerAngles;
-                    eulerAngles.z += offset;
-                    bulletIns.transform.eulerAngles = eulerAngles;
-                }
+                // 一次发射多发子弹的时候，设置弹道偏移
+                var offset = i % 2 == 0 ? UnityEngine.Random.Range(-12, 0) : UnityEngine.Random.Range(0, 12);
+                var eulerAngles = bulletIns.transform.eulerAngles;
+                eulerAngles.z += offset;
+                bulletIns.transform.eulerAngles = eulerAngles;
             }
         }
 

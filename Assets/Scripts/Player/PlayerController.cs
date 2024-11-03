@@ -33,6 +33,7 @@ namespace Player
 
         private bool _isFacingRight = true;
         private bool _isDead;
+        private int _hurtTextSize;
         private float _speed;
         private Vector3 _moveDir;
         private Animator _animator;
@@ -50,6 +51,7 @@ namespace Player
         private void Start()
         {
             _speed = playerStatus.speed;
+            _hurtTextSize = playerStatus.hurtTextSize;
             LoadCharacter();
             LoadWeapon();
             InitStatusBar();
@@ -66,7 +68,7 @@ namespace Player
             // 受攻击时镜头抖动
             _impulseSource.GenerateImpulse(0.2f);
             // 出现生命减少提示
-            TextPool.Instance.GetText(transform.position, "-" + damage, 6);
+            TextPool.Instance.GetText(transform.position, "-" + damage, _hurtTextSize);
 
             var remainHealth = playerStatus.health - damage;
             playerStatus.health = remainHealth <= 0 ? 0 : remainHealth;

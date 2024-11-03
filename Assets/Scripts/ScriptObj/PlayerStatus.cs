@@ -32,6 +32,7 @@ namespace ScriptObj
         public int goldValue; //金币
         public bool isAttackWithPoison; //攻击是否带毒
         public int weaponSlot = 6; //武器槽位
+        public int hurtTextSize = 10; // 受伤字体大小
 
         public void Init()
         {

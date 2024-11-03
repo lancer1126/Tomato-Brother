@@ -14,7 +14,7 @@ namespace Player.Weapon.Projectile
         protected Vector2 Forward;
         protected Action ReleaseAction;
         protected Rigidbody2D Rb2;
-        
+
         private float _aliveTimer; // 子弹存活计时器
 
         protected virtual void Awake()
@@ -40,7 +40,7 @@ namespace Player.Weapon.Projectile
                 IsBulletEnd = true;
                 _aliveTimer = 0;
             }
-            
+
             if (IsBulletEnd)
             {
                 Rb2.velocity = Vector2.zero;
@@ -51,6 +51,8 @@ namespace Player.Weapon.Projectile
                 Rb2.velocity = Forward * Speed;
             }
         }
+
+        protected virtual void OnDisable() { }
 
         public virtual void InitFromWeapon(RangedWeapon weapon)
         {

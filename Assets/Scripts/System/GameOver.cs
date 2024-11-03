@@ -25,7 +25,7 @@ namespace System
 
         public void ToMainMenu()
         {
-            SceneManager.LoadScene("Start");
+            SceneLoader.Instance.Load("Start");
         }
 
         public void QuitGame()

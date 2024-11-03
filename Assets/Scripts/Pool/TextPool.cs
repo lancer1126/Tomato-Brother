@@ -40,6 +40,7 @@ namespace Pool
             tmp.text = str;
             tmp.color = color;
             tmp.fontSize = fontSize;
+            tmp.fontStyle = FontStyles.Bold;
             return textObj;
         }
 

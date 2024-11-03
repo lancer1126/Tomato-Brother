@@ -47,6 +47,8 @@ namespace Player.Weapon
             Attack();
         }
 
+        protected virtual void Update() { }
+
         protected virtual void OnTriggerEnter2D(Collider2D other) { }
 
         /// <summary>

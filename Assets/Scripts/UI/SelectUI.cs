@@ -104,7 +104,7 @@ namespace UI
             AudioManager.Instance.Play(confirmAudio, _cameraDefaultPos);
             bag.character = shopProduct.characterList[_characterIndex];
             bag.weaponList.Add(shopProduct.weaponList[_weaponIndex]);
-            SceneManager.LoadScene("Fight");
+            SceneLoader.Instance.Load("Fight");
         }
 
         private void CustomCharacterStyle(TemplateContainer itemUI, Character item)
