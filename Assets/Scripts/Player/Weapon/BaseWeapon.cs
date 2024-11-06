@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Player.Weapon.Projectile;
 using UnityEngine;
 using Util;
 
@@ -7,11 +8,13 @@ namespace Player.Weapon
 {
     public class BaseWeapon : MonoBehaviour
     {
+        public bool haveBullet; // 是否有子弹组件
         public int level; // 等级
         public int weaponIndex = -1; // 当前武器在背包中的索引
         public float damage; // 伤害
         public float repelPower; // 攻击对敌人的击退力
         public string weaponName; // 武器名称
+        public Bullet bullet; //子弹组件
 
         [SerializeField]
         protected int enemyDetectCount; // 一次检测敌人的数量

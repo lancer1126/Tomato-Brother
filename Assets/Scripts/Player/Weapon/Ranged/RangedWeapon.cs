@@ -13,7 +13,7 @@ namespace Player.Weapon.Ranged
         public int bulletsPerShot; // 每次攻击多少发子弹
         public float bulletSpeed; // 子弹速度
         public float bulletAliveTime; // 子弹存活时间
-        public Bullet bullet; //子弹组件
+        
 
         [SerializeField]
         protected float recoil; // 后坐力

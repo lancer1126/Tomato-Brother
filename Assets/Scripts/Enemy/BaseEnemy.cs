@@ -109,7 +109,7 @@ namespace Enemy
 
             IsHurt = true;
             // 播放受伤音效
-            // AudioManager.Instance.Play(hurtSound, transform.position, 0.05f);
+            AudioManager.Instance.Play(hurtSound, 0.1f);
             // 受攻击时触发敌人颜色变色
             StartCoroutine(HitFlash());
             // 被击中后的特效

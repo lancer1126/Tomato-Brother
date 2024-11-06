@@ -14,28 +14,11 @@ namespace Player.Weapon.Projectile
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
-                if (CurPenetration <= 0)
-                {
-                    return;
-                }
-
-                CurPenetration--;
-                var enemy = other.gameObject.GetComponent<BaseEnemy>();
-                enemy.TakeDamage(transform, Damage, RepelPower);
-
-                if (CurPenetration <= 0)
-                {
-                    BulletEnd();
-                }
-                else
-                {
-                    // 每穿过一个敌人伤害就减半
-                    Damage /= 2;
-                }
+                CollideToEnemy(other);
             }
             else
             {
-                BulletEnd();
+                DefaultCollide();
             }
         }
 
@@ -47,7 +30,34 @@ namespace Player.Weapon.Projectile
             CurPenetration = MaxPenetration;
         }
 
-        private void BulletEnd()
+        protected virtual void CollideToEnemy(Collider2D other)
+        {
+            if (CurPenetration <= 0)
+            {
+                return;
+            }
+
+            CurPenetration--;
+            var enemy = other.gameObject.GetComponent<BaseEnemy>();
+            enemy.TakeDamage(transform, Damage, RepelPower);
+
+            if (CurPenetration <= 0)
+            {
+                BulletEnd();
+            }
+            else
+            {
+                // 每穿过一个敌人伤害就减半
+                Damage /= 2;
+            }
+        }
+
+        protected virtual void DefaultCollide()
+        {
+            BulletEnd();
+        }
+
+        protected virtual void BulletEnd()
         {
             IsBulletEnd = true;
             RecycleBullet();

@@ -28,6 +28,11 @@ namespace Player.Weapon.Melee
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
+            MeleeAttackCollide(other);
+        }
+
+        protected virtual void MeleeAttackCollide(Collider2D other)
+        {
             // 仅在攻击时有效
             if (!other.gameObject.CompareTag("Enemy") || !IsAttacking)
             {

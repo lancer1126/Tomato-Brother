@@ -171,4 +171,4 @@ MonoBehaviour:
   attackInterval: 1
   knockbackDuration: 0.2
   deadDuration: 0.3
-  hurtSound: {fileID: 8300000, guid: 52dea2ceed1f03548b3772d092cde0b9, type: 3}
+  hurtSound: {fileID: 8300000, guid: 27375607dc3d65d42a2fe0d4c7f9a072, type: 3}

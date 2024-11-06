@@ -28038,6 +28038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98d75db0cc741ed9167089759ce3071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemCount: 4
   shopProduct: {fileID: 11400000, guid: e18d9815983400b468964064c0c3d3d4, type: 2}
   upgradeObj: {fileID: 434210660}
   upgradeItem: {fileID: 4124983347958784142, guid: 04f318103b4711d409a9c53cd99dd8fb, type: 3}

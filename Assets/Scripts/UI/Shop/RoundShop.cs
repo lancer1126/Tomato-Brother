@@ -9,6 +9,8 @@ namespace UI.Shop
     public class RoundShop : MonoBehaviour
     {
         [SerializeField]
+        private int itemCount = 4;
+        [SerializeField]
         private ShopProduct shopProduct;
         [SerializeField]
         private GameObject upgradeObj;
@@ -48,8 +50,13 @@ namespace UI.Shop
             }
             
             var existWeapons = playerBag.weaponList.Select(w => w.itemName).ToList();
+            var initCount = 0;
             foreach (var weapon in shopProduct.weaponList)
             {
+                if (initCount >= itemCount)
+                {
+                    break;
+                }
                 if (existWeapons.Contains(weapon.itemName))
                 {
                     continue;
@@ -57,6 +64,7 @@ namespace UI.Shop
 
                 var upItem = Instantiate(upgradeItem, upgradeObj.transform);
                 upItem.GetComponent<UpgradeItem>().Init(weapon);
+                initCount++;
             }
         }
 

@@ -11,7 +11,7 @@ namespace Player.Weapon.Projectile
         protected float Speed;
         protected float Damage;
         protected float AliveDuration; // 子弹存活时间
-        protected Vector2 Forward;
+        protected Vector3 Forward;
         protected Action ReleaseAction;
         protected Rigidbody2D Rb2;
 

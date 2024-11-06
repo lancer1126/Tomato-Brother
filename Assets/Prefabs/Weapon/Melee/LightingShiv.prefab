@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4590123385743657082
+--- !u!1 &5342863533574096510
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4715472516940711709}
+  - component: {fileID: 6815187956514601540}
   m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
@@ -16,22 +16,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4715472516940711709
+--- !u!4 &6815187956514601540
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4590123385743657082}
+  m_GameObject: {fileID: 5342863533574096510}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.173, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4287394476118547981}
+  m_Father: {fileID: 1908712906116907230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7771890862006042391
+--- !u!1 &9118775905515773441
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,39 +39,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4287394476118547981}
-  - component: {fileID: 5224760058264869975}
-  - component: {fileID: 696128240615434044}
+  - component: {fileID: 1908712906116907230}
+  - component: {fileID: 7416988190140575036}
+  - component: {fileID: 4212298612319710053}
+  - component: {fileID: -2718779051247666515}
   m_Layer: 0
-  m_Name: Shuriken
+  m_Name: LightingShiv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4287394476118547981
+--- !u!4 &1908712906116907230
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771890862006042391}
+  m_GameObject: {fileID: 9118775905515773441}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0.92, z: 0.05040118}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalPosition: {x: -1.35, y: 0, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4715472516940711709}
+  - {fileID: 6815187956514601540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5224760058264869975
+--- !u!212 &7416988190140575036
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771890862006042391}
+  m_GameObject: {fileID: 9118775905515773441}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -106,45 +107,93 @@ SpriteRenderer:
   m_SortingLayerID: 131338805
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5b74c413c47641344a9901311ba5bce8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b8a0d19b12ad5d84bbc04bbd7ae1c931, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &696128240615434044
+--- !u!61 &4212298612319710053
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9118775905515773441}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 320
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 695
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.070432305, y: -0.010976456}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.64}
+    newSize: {x: 1, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5920415, y: 0.14971785}
+  m_EdgeRadius: 0
+--- !u!114 &-2718779051247666515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771890862006042391}
+  m_GameObject: {fileID: 9118775905515773441}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01dbe7b35a24e5e96190755824d7339, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c2f349b03bc47b3850b9c868595aa44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   haveBullet: 1
   level: 0
   weaponIndex: -1
   damage: 10
-  repelPower: 5
+  repelPower: 4
   weaponName: 
-  bullet: {fileID: 683461793019949259, guid: c739bed4432eff3498f02563e8b36f66, type: 3}
+  bullet: {fileID: -2780697302789498512, guid: ff29e917648065e4fb174c45abf6ed4e, type: 3}
   enemyDetectCount: 5
-  detectRange: 15
-  attackInterval: 0.8
-  detectInterval: 0
+  detectRange: 10
+  attackInterval: 1
+  detectInterval: 0.2
   attackAudio: {fileID: 8300000, guid: 0376865b57ff2d24fab54e37ba9108e9, type: 3}
-  bulletMaxPenetration: 1
-  bulletsPerShot: 1
-  bulletSpeed: 40
-  bulletAliveTime: 1
-  recoil: 0
-  muzzle: {fileID: 4590123385743657082}
-  rebornInterval: 0.5
+  meleeAttackDistance: 3
+  meleeAttackDuration: 0.1
+  maxPenetration: 1
+  bulletSpeed: 22
+  bulletDamage: 10
+  bulletAliveDuration: 1
+  bulletRepelPower: 2
+  bulletDetectRange: 20
+  muzzle: {fileID: 5342863533574096510}
+  lightingSound: {fileID: 8300000, guid: 66fc592353181bf47b6f4a3094fb3a80, type: 3}

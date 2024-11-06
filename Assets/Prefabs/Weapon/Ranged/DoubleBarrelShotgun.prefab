@@ -129,11 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb560b29209462fb6502cb33cdbc96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  haveBullet: 1
   level: 0
   weaponIndex: -1
   damage: 5
   repelPower: 8
   weaponName: 
+  bullet: {fileID: -4138733957948849057, guid: 31b47d268e930c5479a27852c5121fe8, type: 3}
   enemyDetectCount: 10
   detectRange: 10
   attackInterval: 1.2
@@ -142,7 +144,6 @@ MonoBehaviour:
   bulletMaxPenetration: 2
   bulletsPerShot: 3
   bulletSpeed: 60
-  bulletAliveTime: 0.5
-  bullet: {fileID: -4138733957948849057, guid: 31b47d268e930c5479a27852c5121fe8, type: 3}
+  bulletAliveTime: 0.2
   recoil: 0
   muzzle: {fileID: 1279548639417248028}

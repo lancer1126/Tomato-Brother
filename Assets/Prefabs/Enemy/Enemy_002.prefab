@@ -171,7 +171,7 @@ MonoBehaviour:
   attackInterval: 2
   knockbackDuration: 0.2
   deadDuration: 0.3
-  hurtSound: {fileID: 0}
+  hurtSound: {fileID: 8300000, guid: 27375607dc3d65d42a2fe0d4c7f9a072, type: 3}
   bulletSpeed: 10
   bulletAliveTime: 5
   bullet: {fileID: 1606172565302842958, guid: 20f0999731370d749b8cb9af60b7ef2c, type: 3}
