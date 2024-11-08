@@ -130,8 +130,13 @@ MonoBehaviour:
   gameStatus: {fileID: 11400000, guid: 2c50e745abaca174a9ced978b2cfc9ee, type: 2}
   goldText: {fileID: 0}
   weaponPosList:
-  - {x: 1, y: 0}
-  - {x: -1, y: 0}
+  - {x: 1, y: 0.25}
+  - {x: -1, y: 0.25}
+  - {x: 1, y: -0.25}
+  - {x: -1, y: -0.25}
+  - {x: -1, y: -0.25}
+  - {x: 1, y: 0.8}
+  - {x: -1, y: 0.8}
 --- !u!50 &2115207473522550528
 Rigidbody2D:
   serializedVersion: 4

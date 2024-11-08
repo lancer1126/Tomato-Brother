@@ -6,7 +6,7 @@ namespace ScriptObj
     public class GameStatus : ScriptableObject
     {
         public int wave; // 第几波敌人
-        public int roundTime = 45; // 一局的默认时间
+        public int roundTime; // 一局的默认时间
         public string overMenuText; // 暂停时的标题;
         public GameStatusEnum status; // 游戏状态
 
@@ -15,6 +15,11 @@ namespace ScriptObj
             wave = 1;
             overMenuText = "GAME OVER";
             status = GameStatusEnum.Playing;
+        }
+
+        public int GetRoundTime()
+        {
+            return roundTime != 0 ? roundTime : Random.Range(30, 46);
         }
     }
 

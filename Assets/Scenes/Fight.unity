@@ -29077,7 +29077,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBornCount: 2
   enemyBornInterval: 2
-  enemyBornTime: 0
   clockStartTime: 5
   bornAnimation: {fileID: 4042426080689193013, guid: 015507cb9fbf4124b9babee50aa72636, type: 3}
   gameOverMenu: {fileID: 981044582}
@@ -30432,31 +30431,23 @@ PrefabInstance:
       objectReference: {fileID: 981044582}
     - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
       propertyPath: weaponPosList.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
-      propertyPath: weaponPosList.Array.data[0].y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
-      propertyPath: weaponPosList.Array.data[1].y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
-      propertyPath: weaponPosList.Array.data[2].x
+      propertyPath: weaponPosList.Array.data[4].x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
-      propertyPath: weaponPosList.Array.data[2].y
-      value: -0.25
+      propertyPath: weaponPosList.Array.data[4].y
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
-      propertyPath: weaponPosList.Array.data[3].x
+      propertyPath: weaponPosList.Array.data[5].x
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8186382711586598948, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
-      propertyPath: weaponPosList.Array.data[3].y
-      value: -0.25
+      propertyPath: weaponPosList.Array.data[5].y
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8231507053646852325, guid: 60047e9f18dfde046bbfa558dae4d2d9, type: 3}
       propertyPath: m_LocalPosition.x

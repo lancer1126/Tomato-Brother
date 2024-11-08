@@ -136,5 +136,5 @@ MonoBehaviour:
   player: {fileID: 0}
   gainAudio: {fileID: 8300000, guid: ece86934635b6824cb1aebf1a21e27f1, type: 3}
   goldValue: 3
-  speed: 10
+  speed: 11
   pickUpRange: 3

@@ -4,7 +4,6 @@ using Pool;
 using ScriptObj;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace System
 {
@@ -14,8 +13,6 @@ namespace System
         private int enemyBornCount = 10; // 批次生成敌人数量
         [SerializeField]
         private float enemyBornInterval = 3; // 敌人生成间隔
-        [SerializeField]
-        private float enemyBornTime; // 标记生成敌人
         [SerializeField]
         private float clockStartTime = 5; // 倒计时声音开始的节点
         [SerializeField]
@@ -39,17 +36,17 @@ namespace System
         private const int MapScaleY = 16;
         private bool _isPauseOpen;
         private bool _shopOpened;
-        private int _enemyType;
+        private int _enemyType; // 敌人种类
         private float _gameTime; // 一局游戏时间
         private float _clockTimer;
+        private float _enemyBornTimer; // 标记生成敌人
         private AudioSource _bgm;
         private List<EnemyPool> _enemyPools; // 敌人对象池
 
         private void Awake()
         {
-            enemyBornTime = enemyBornInterval;
-            _bgm = GetComponent<AudioSource>();
             Time.timeScale = 1;
+            _bgm = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -97,19 +94,16 @@ namespace System
         /// </summary>
         private void InitWave()
         {
+            _gameTime = gameStatus.GetRoundTime();
             if (gameStatus.wave == 0)
             {
                 gameStatus.wave = 1;
             }
-            if (_gameTime == 0)
-            {
-                _gameTime = gameStatus.roundTime;
-            }
 
             enemyBornCount *= gameStatus.wave;
-            if (enemyBornCount > 20)
+            if (enemyBornCount > 8)
             {
-                enemyBornCount = 20;
+                enemyBornCount = 8;
             }
 
             enemyBornInterval += gameStatus.wave - 1;
@@ -178,15 +172,16 @@ namespace System
                     AudioManager.Instance.Play(clockClip, 0.5f);
                     _clockTimer = 0;
                 }
+
                 _clockTimer += Time.deltaTime;
             }
 
             // 计算敌人出生
-            enemyBornTime += Time.deltaTime;
-            if (enemyBornTime > enemyBornInterval)
+            _enemyBornTimer += Time.deltaTime;
+            if (_enemyBornTimer > enemyBornInterval)
             {
                 EnemyBorn();
-                enemyBornTime = 0;
+                _enemyBornTimer = 0;
             }
         }
 

@@ -11,12 +11,6 @@ namespace Player.Weapon.Ranged
         private bool _launched; // 手里剑是否已发射
         private float _rebornTimer; // 手里剑刷新计时器
 
-        protected override void Start()
-        {
-            transform.localScale = new Vector3(0, 0, 0);
-            base.Start();
-        }
-
         protected override void FixedUpdate()
         {
             var proceed = true;
