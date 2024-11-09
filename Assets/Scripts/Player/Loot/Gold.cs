@@ -41,7 +41,7 @@ namespace Player.Loot
                 return;
             }
 
-            AudioManager.Instance.Play(gainAudio, transform.position, 0.5f);
+            AudioManager.Instance.Play(gainAudio, 0.1f);
             _playerController.AddGold(goldValue);
             GoldPool.Instance.ReleaseFromPool(this);
         }

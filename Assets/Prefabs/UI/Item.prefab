@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -89.7}
-  m_SizeDelta: {x: 180, y: 45}
+  m_AnchoredPosition: {x: -0.3787, y: -96}
+  m_SizeDelta: {x: 197.4213, y: 70.6042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1737278489976863511
 CanvasRenderer:
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.09803922, g: 0.09411765, b: 0.09803922, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.41568628, g: 0.41568628, b: 0.39215687, a: 1}
+    m_PressedColor: {r: 0.70980394, g: 0.7019608, b: 0.6784314, a: 1}
     m_SelectedColor: {r: 0.09803922, g: 0.09411765, b: 0.09803922, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -167,8 +167,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -118, y: 57}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -124.438225, y: 47}
+  m_SizeDelta: {x: 132.5701, y: 121.9658}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3843061947982492024
 CanvasRenderer:
@@ -242,8 +242,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 57.7, y: 31.8}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 73.62685, y: 3.6453}
+  m_SizeDelta: {x: 231.8537, y: 106.3094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5366903128132562278
 CanvasRenderer:
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
   itemName: {fileID: 7023032796832788974}
   description: {fileID: 6022263481175617394}
   button: {fileID: 4645975131387276575}
-  selectClip: {fileID: 8300000, guid: e166ad01fa4894540bace9b1be5342da, type: 3}
+  selectClip: {fileID: 8300000, guid: cdad2107a19b7b04eb50680084772a8e, type: 3}
 --- !u!1 &4639683466856612402
 GameObject:
   m_ObjectHideFlags: 0

@@ -30172,6 +30172,7 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 1305481859492211562, guid: 35ce313be92d44748a826cc516bd06db, type: 3}
   - {fileID: 908094238233119484, guid: 9d079034aab969041b915d9d82067306, type: 3}
+  - {fileID: 5392592255176551793, guid: 85a2da8dfd99d3343a4d1b4cb33d10bb, type: 3}
   enemyBulletTypes:
   - {fileID: 1606172565302842958, guid: 20f0999731370d749b8cb9af60b7ef2c, type: 3}
 --- !u!1 &2088633308

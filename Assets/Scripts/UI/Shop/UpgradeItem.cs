@@ -37,7 +37,7 @@ namespace UI.Shop
 
         public void ChooseItem()
         {
-            AudioManager.Instance.Play(selectClip);
+            AudioManager.Instance.Play(selectClip, 0.3f);
             _roundShop.AddItemToBag(_item);
             gameObject.SetActive(false);
             transform.parent.gameObject.SetActive(false);

@@ -36,7 +36,7 @@ namespace System
         private const int MapScaleY = 16;
         private bool _isPauseOpen;
         private bool _shopOpened;
-        private int _enemyType; // 敌人种类
+        private int _roundEnemyType; // 该回合敌人种类
         private float _gameTime; // 一局游戏时间
         private float _clockTimer;
         private float _enemyBornTimer; // 标记生成敌人
@@ -52,7 +52,6 @@ namespace System
         private void Start()
         {
             _enemyPools = PoolController.Instance.enemyPools;
-            _enemyType = _enemyPools.Count;
             _bgm.ignoreListenerPause = true;
             InitWave();
             EnemyBorn();
@@ -99,19 +98,22 @@ namespace System
             {
                 gameStatus.wave = 1;
             }
-
+            
+            // 初始化该回合敌人种类
+            _roundEnemyType = gameStatus.InitRoundEnemyType(_enemyPools.Count);
+            
             enemyBornCount *= gameStatus.wave;
-            if (enemyBornCount > 8)
+            if (enemyBornCount > 10)
             {
-                enemyBornCount = 8;
+                enemyBornCount = 10;
             }
 
             enemyBornInterval += gameStatus.wave - 1;
-            if (enemyBornInterval > 5)
+            if (enemyBornInterval > 4)
             {
-                enemyBornInterval = 5;
+                enemyBornInterval = 4;
             }
-
+            
             waveText.text = "第" + gameStatus.wave + "轮";
         }
 
@@ -143,7 +145,7 @@ namespace System
                 var y = UnityEngine.Random.Range(-MapScaleY, MapScaleY);
 
                 // 敌人种类索引，按照索引的顺序生成不同种类的敌人
-                var enemyIndex = UnityEngine.Random.Range(0, _enemyType);
+                var enemyIndex = UnityEngine.Random.Range(0, _roundEnemyType);
                 StartCoroutine(ToBorn(enemyIndex, new Vector2(x, y)));
             }
         }

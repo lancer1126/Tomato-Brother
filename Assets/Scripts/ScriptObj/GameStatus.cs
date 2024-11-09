@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ScriptObj
 {
@@ -20,6 +22,19 @@ namespace ScriptObj
         public int GetRoundTime()
         {
             return roundTime != 0 ? roundTime : Random.Range(30, 46);
+        }
+
+        public int InitRoundEnemyType(int enemyPoolsCount)
+        {
+            var enemyTypes = wave switch
+            {
+                1 => 1,
+                > 1 and <= 3 => 2,
+                > 3 and <= 5 => 3,
+                _ => enemyPoolsCount
+            };
+
+            return Math.Min(enemyTypes, enemyPoolsCount);
         }
     }
 
