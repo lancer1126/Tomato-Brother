@@ -114,12 +114,12 @@ namespace Player
                 }
 
                 // 移动
-                _rb2.velocity = _moveDir * _speed;
+                _rb2.linearVelocity = _moveDir * _speed;
             }
             else
             {
                 _animator.SetBool(IsMoving, false);
-                _rb2.velocity = Vector2.zero;
+                _rb2.linearVelocity = Vector2.zero;
             }
         }
 
@@ -166,7 +166,7 @@ namespace Player
         private void PlayerDie()
         {
             _isDead = true;
-            _rb2.velocity = Vector2.zero;
+            _rb2.linearVelocity = Vector2.zero;
             gameStatus.overMenuText = "GAME OVER";
             gameOverMenu.SetActive(true);
         }

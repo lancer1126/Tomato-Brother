@@ -43,12 +43,12 @@ namespace Player.Weapon.Projectile
 
             if (IsBulletEnd)
             {
-                Rb2.velocity = Vector2.zero;
+                Rb2.linearVelocity = Vector2.zero;
                 ToRecycle();
             }
             else
             {
-                Rb2.velocity = Forward * Speed;
+                Rb2.linearVelocity = Forward * Speed;
             }
         }
 

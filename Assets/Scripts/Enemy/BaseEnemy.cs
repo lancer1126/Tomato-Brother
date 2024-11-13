@@ -221,7 +221,7 @@ namespace Enemy
             ToPlayerDir = Player.transform.position - transform.position;
             if (IsDead || IsHurt)
             {
-                Rb2.velocity = Vector2.zero;
+                Rb2.linearVelocity = Vector2.zero;
             }
             else
             {
@@ -238,7 +238,7 @@ namespace Enemy
         {
             if (ToPlayerDir.magnitude > 0.5f)
             {
-                Rb2.velocity = forward * moveSpeed;
+                Rb2.linearVelocity = forward * moveSpeed;
             }
             else
             {

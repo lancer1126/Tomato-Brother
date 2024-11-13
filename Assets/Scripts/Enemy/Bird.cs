@@ -34,7 +34,7 @@ namespace Enemy
         {
             if (ToPlayerDir.magnitude > 5)
             {
-                Rb2.velocity = forward * (moveSpeed * Time.deltaTime);
+                Rb2.linearVelocity = forward * (moveSpeed * Time.deltaTime);
             }
             else
             {

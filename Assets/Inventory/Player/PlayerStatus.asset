@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
   maxHealth: 100
-  health: 90
+  health: 80
   healthRecover: 0
   level: 1
   maxExp: 100
@@ -27,6 +27,7 @@ MonoBehaviour:
   dodgeRate: 0
   speed: 10
   pickUpRange: 3
-  goldValue: 0
+  goldValue: 63
   isAttackWithPoison: 0
   weaponSlot: 6
+  hurtTextSize: 10

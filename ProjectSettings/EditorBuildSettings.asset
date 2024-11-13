@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fight.unity
     guid: c546df45d059cb543bfdf12d878f20a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Shop.unity
     guid: 8a2ae817efef14c4382c7fae32902371
   m_configObjects: {}
